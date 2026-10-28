@@ -1,0 +1,84 @@
+{
+  "checks": [
+    {
+      "route": "cases",
+      "hasContent": true
+    },
+    {
+      "route": "new",
+      "hasContent": true
+    },
+    {
+      "route": "upload",
+      "hasContent": true
+    },
+    {
+      "route": "review",
+      "hasContent": true
+    },
+    {
+      "route": "audit",
+      "hasContent": true
+    },
+    {
+      "route": "price",
+      "hasContent": true
+    },
+    {
+      "route": "evidence",
+      "hasContent": true
+    },
+    {
+      "route": "complaint",
+      "hasContent": true
+    },
+    {
+      "route": "affidavit",
+      "hasContent": true
+    },
+    {
+      "route": "reports",
+      "hasContent": true
+    },
+    {
+      "route": "help",
+      "hasContent": true
+    },
+    {
+      "route": "settings",
+      "hasContent": true
+    },
+    {
+      "route": "detail",
+      "hasContent": true
+    },
+    {
+      "route": "overview",
+      "hasContent": true
+    },
+    {
+      "caseWizard": "passed"
+    },
+    {
+      "fileValidationAndLocalSelection": "passed"
+    },
+    {
+      "draftWizardAndExport": "passed"
+    },
+    {
+      "mobileDrawer": "passed"
+    }
+  ],
+  "browserErrors": [],
+  "additionalChecks": [
+    "Search and empty results",
+    "User finding review",
+    "Sample extracted-field confirmation",
+    "Evidence linking",
+    "Report text download",
+    "Separate empty workspace",
+    "All views at 390, 768 and 1440px viewport widths"
+  ],
+  "additionalBrowserErrors": [],
+  "scope": "Frontend/browser checks only. No backend was supplied. TypeScript client was not compiled; it is an unconnected integration scaffold."
+}

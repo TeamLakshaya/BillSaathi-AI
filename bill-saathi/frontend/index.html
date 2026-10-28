@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bill Saathi AI · Patient Workspace</title>
+  
+  <!-- Modern Inter Typography from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Modular CSS Architecture -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/stepper.css">
+  <link rel="stylesheet" href="css/tables.css">
+  <link rel="stylesheet" href="css/views.css">
+</head>
+<body>
+  <!-- Overlay for Mobile Drawer Navigation -->
+  <div class="overlay" onclick="document.body.classList.remove('mobile-open')"></div>
+
+  <!-- Main Left Sidebar -->
+  <aside class="sidebar" id="sidebar"></aside>
+
+  <!-- Application Shell -->
+  <div class="shell">
+    <header class="topbar" id="topbar"></header>
+    <main class="main" id="main"></main>
+  </div>
+
+  <!-- Reusable Accessible Dialog Modal & Live Toast Root -->
+  <dialog id="dialog"></dialog>
+  <div id="toast-root" role="status" aria-live="polite"></div>
+
+  <!-- Core Scripts in Dependency Order -->
+  <script src="js/icons.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/state.js"></script>
+  
+  <!-- UI Components -->
+  <script src="js/components/modal.js"></script>
+  <script src="js/components/toast.js"></script>
+  <script src="js/components/navigation.js"></script>
+  <script src="js/components/stepper.js"></script>
+
+  <!-- Views -->
+  <script src="js/views/overview.js"></script>
+  <script src="js/views/cases.js"></script>
+  <script src="js/views/detail.js"></script>
+  <script src="js/views/wizard.js"></script>
+  <script src="js/views/upload.js"></script>
+  <script src="js/views/review.js"></script>
+  <script src="js/views/audit.js"></script>
+  <script src="js/views/price.js"></script>
+  <script src="js/views/evidence.js"></script>
+  <script src="js/views/drafts.js"></script>
+  <script src="js/views/reports.js"></script>
+  <script src="js/views/help.js"></script>
+  <script src="js/views/settings.js"></script>
+
+  <!-- App Bootstrap & Router -->
+  <script src="js/app.js"></script>
+</body>
+</html>

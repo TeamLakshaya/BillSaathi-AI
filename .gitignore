@@ -1,0 +1,65 @@
+# Dependencies
+node_modules/
+*/node_modules/
+package-lock.json.bak
+
+# Production Builds
+dist/
+*/dist/
+build/
+*/build/
+
+# Python & Virtual Environments
+__pycache__/
+*/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+*/env/
+venv/
+*/venv/
+.venv/
+*/.venv/
+ENV/
+
+# Database files
+*.db
+*.db-journal
+*.sqlite3
+backend/billsaathi.db
+
+# User Uploads & Generated Reports (retaining folder structure via .gitkeep)
+uploads/*
+!uploads/.gitkeep
+backend/uploads/*
+!backend/uploads/.gitkeep
+reports/*
+!reports/.gitkeep
+backend/reports/*
+!backend/reports/.gitkeep
+
+# Environment variables & secrets
+.env
+.env.*
+!.env.example
+*.env
+*.env.local
+
+# Testing, Logs & Cache
+.pytest_cache/
+*/.pytest_cache/
+.ruff_cache/
+*/.ruff_cache/
+.coverage
+htmlcov/
+*.log
+
+# Editor & OS Artifacts
+.vscode/
+.idea/
+*.swp
+*.swo
+Thumbs.db
+.DS_Store

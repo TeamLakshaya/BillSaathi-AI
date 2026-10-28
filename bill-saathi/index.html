@@ -1,0 +1,3858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bill Saathi AI · Patient Workspace</title>
+  
+  <!-- Modern Inter Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       DESIGN SYSTEM & THEME TOKENS
+       ========================================================================== */
+    :root {
+      /* Colors */
+      --navy: #0f172a;
+      --blue: #2563eb;
+      --blue-hover: #1d4ed8;
+      --blue-light: #eff6ff;
+      --blue-border: #bfdbfe;
+      
+      --teal: #0d9488;
+      --teal-hover: #0f766e;
+      --teal-light: #f0fdfa;
+      --teal-border: #ccfbf1;
+      
+      --amber: #d97706;
+      --amber-light: #fef3c7;
+      --amber-border: #fde68a;
+      
+      --emerald: #059669;
+      --emerald-light: #ecfdf5;
+      --emerald-border: #a7f3d0;
+      
+      --red: #dc2626;
+      --red-light: #fef2f2;
+      --red-border: #fecaca;
+      
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --text-subtle: #94a3b8;
+      
+      --line: #e2e8f0;
+      --line-subtle: #f1f5f9;
+      
+      /* Elevation */
+      --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.05);
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.03);
+      --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.06), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
+      --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.03);
+      
+      /* Radius */
+      --radius-sm: 6px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
+      --radius-full: 9999px;
+    }
+
+    /* Reset & Base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+      min-height: 100vh;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--text);
+      background-color: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      border: 1px solid var(--line);
+      background: var(--card-bg);
+      border-radius: var(--radius-md);
+      padding: 8px 14px;
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      font-weight: 600;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    button:hover {
+      background: var(--line-subtle);
+      border-color: #cbd5e1;
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+      transform: none;
+    }
+
+    button.primary {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #ffffff;
+      box-shadow: 0 1px 2px rgba(37, 99, 235, 0.2);
+    }
+
+    button.primary:hover {
+      background: var(--blue-hover);
+      border-color: var(--blue-hover);
+      box-shadow: 0 2px 4px rgba(37, 99, 235, 0.25);
+    }
+
+    button.teal {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: #ffffff;
+    }
+
+    button.teal:hover {
+      background: var(--teal-hover);
+    }
+
+    button.ghost {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+    }
+
+    button.ghost:hover {
+      background: var(--line-subtle);
+      color: var(--text);
+    }
+
+    button.small {
+      padding: 5px 9px;
+      font-size: 11.5px;
+      border-radius: var(--radius-sm);
+    }
+
+    button.danger {
+      color: var(--red);
+      border-color: #fca5a5;
+    }
+
+    button.danger:hover {
+      background: var(--red-light);
+    }
+
+    .text-link {
+      border: none;
+      background: none;
+      color: var(--blue);
+      font-size: 12.5px;
+      font-weight: 500;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .text-link:hover {
+      background: transparent;
+      color: var(--blue-hover);
+      text-decoration: underline;
+    }
+
+    svg {
+      width: 17px;
+      height: 17px;
+      flex-shrink: 0;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ==========================================================================
+       SIDEBAR NAVIGATION
+       ========================================================================== */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 250px;
+      background: #ffffff;
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      z-index: 30;
+      transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .brand {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 24px 20px 20px;
+    }
+
+    .brand-mark {
+      background: var(--teal);
+      color: #ffffff;
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      box-shadow: 0 2px 4px rgba(13, 148, 136, 0.2);
+    }
+
+    .brand-mark svg {
+      width: 22px;
+      height: 22px;
+      stroke-width: 2;
+    }
+
+    .brand-copy {
+      font-size: 17px;
+      font-weight: 750;
+      color: var(--text);
+      letter-spacing: -0.4px;
+      line-height: 1.2;
+    }
+
+    .brand small {
+      display: block;
+      letter-spacing: 1.6px;
+      font-size: 8.5px;
+      font-weight: 700;
+      color: var(--text-subtle);
+      margin-top: 3px;
+    }
+
+    .nav-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--text-subtle);
+      padding: 16px 20px 8px;
+      text-transform: uppercase;
+    }
+
+    .nav {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0 10px;
+    }
+
+    .nav button {
+      width: 100%;
+      justify-content: flex-start;
+      border: none;
+      background: transparent;
+      font-size: 12.5px;
+      font-weight: 500;
+      padding: 9px 12px;
+      margin-bottom: 2px;
+      color: #475569;
+      border-radius: var(--radius-md);
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+
+    .nav button svg {
+      width: 17px;
+      height: 17px;
+      color: #64748b;
+    }
+
+    .nav button:hover {
+      background: var(--line-subtle);
+      color: var(--text);
+    }
+
+    .nav button:hover svg {
+      color: var(--text);
+    }
+
+    .nav button.active {
+      color: var(--blue);
+      background: var(--blue-light);
+      font-weight: 600;
+    }
+
+    .nav button.active svg {
+      color: var(--blue);
+    }
+
+    .nav .separate {
+      border-top: 1px solid var(--line);
+      margin-top: 14px;
+      padding-top: 12px;
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding: 16px 14px;
+      border-top: 1px solid var(--line);
+      background: #ffffff;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .avatar {
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      background: #e0f2fe;
+      color: #0369a1;
+      display: inline-grid;
+      place-items: center;
+      font-size: 12px;
+      font-weight: 750;
+      flex-shrink: 0;
+      border: 1px solid #bae6fd;
+    }
+
+    .profile-copy strong {
+      font-size: 12.5px;
+      display: block;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .profile-copy small {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .collapse-btn {
+      margin-top: 12px;
+      width: 100%;
+      font-size: 11.5px;
+      padding: 7px 10px;
+      color: var(--text-muted);
+      border-color: var(--line);
+    }
+
+    .collapse-btn:hover {
+      color: var(--text);
+      background: var(--line-subtle);
+    }
+
+    /* Collapsed Sidebar State */
+    .collapsed .sidebar {
+      width: 70px;
+    }
+
+    .collapsed .shell {
+      margin-left: 70px;
+    }
+
+    .collapsed .brand {
+      padding: 20px 15px;
+      justify-content: center;
+    }
+
+    .collapsed .brand-copy,
+    .collapsed .nav-label,
+    .collapsed .nav button span,
+    .collapsed .profile .profile-copy,
+    .collapsed .sidebar-footer .collapse-label {
+      display: none;
+    }
+
+    .collapsed .nav button {
+      justify-content: center;
+      padding: 11px;
+    }
+
+    .collapsed .sidebar-footer {
+      padding: 14px 10px;
+    }
+
+    .collapsed .profile {
+      justify-content: center;
+    }
+
+    /* ==========================================================================
+       TOP NAVIGATION BAR
+       ========================================================================== */
+    .shell {
+      margin-left: 250px;
+      transition: margin 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .topbar {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 0 32px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .crumb {
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    .crumb strong {
+      display: block;
+      color: var(--text);
+      font-size: 17px;
+      font-weight: 750;
+      letter-spacing: -0.3px;
+      margin-bottom: 1px;
+    }
+
+    .top-search {
+      margin-left: auto;
+      position: relative;
+      width: 280px;
+    }
+
+    .top-search input {
+      padding-left: 36px;
+      padding-right: 12px;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      font-size: 12px;
+      width: 100%;
+      height: 38px;
+      color: var(--text);
+      transition: all 0.15s ease;
+    }
+
+    .top-search input:focus {
+      background: #ffffff;
+      border-color: var(--blue);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    .top-search svg {
+      position: absolute;
+      left: 11px;
+      top: 10px;
+      color: var(--text-subtle);
+      width: 16px;
+      height: 16px;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      padding: 8px;
+      border-radius: var(--radius-md);
+      color: var(--text-muted);
+    }
+
+    .icon-btn:hover {
+      background: var(--line-subtle);
+      color: var(--text);
+    }
+
+    .top-actions .avatar {
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      border: none;
+    }
+
+    .top-actions .primary {
+      font-size: 12.5px;
+      padding: 8px 16px;
+      height: 38px;
+    }
+
+    .mobile-toggle {
+      display: none;
+    }
+
+    /* ==========================================================================
+       MAIN CONTENT CONTAINER
+       ========================================================================== */
+    .main {
+      flex: 1;
+      max-width: 1480px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px 32px 40px;
+    }
+
+    /* Demo Notice Banner */
+    .demo-banner {
+      background: #ecf6f5;
+      border: 1px solid #d2eae5;
+      border-radius: 10px;
+      padding: 10px 16px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      font-size: 12px;
+      color: #28695e;
+      margin-bottom: 24px;
+    }
+
+    .demo-banner svg {
+      color: var(--teal);
+      width: 18px;
+      height: 18px;
+      stroke-width: 2;
+    }
+
+    .demo-banner strong {
+      font-weight: 700;
+      color: #1a4d45;
+    }
+
+    .demo-banner button {
+      margin-left: auto;
+      font-size: 11px;
+      padding: 4px 12px;
+      color: #28695e;
+      background: #ffffff;
+      border-color: #c6dfd9;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+    }
+
+    .demo-banner button:hover {
+      background: #f7fcfa;
+      border-color: #a3cdc3;
+    }
+
+    /* Hero / Welcome Section */
+    .welcome {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      font-size: 10.5px;
+      font-weight: 750;
+      letter-spacing: 1.5px;
+      color: var(--teal);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .welcome h1, h1 {
+      font-size: 28px;
+      line-height: 1.25;
+      margin: 2px 0 8px;
+      letter-spacing: -0.6px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .welcome p {
+      color: var(--text-muted);
+      font-size: 13px;
+      max-width: 580px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .welcome .actions {
+      flex-shrink: 0;
+      display: flex;
+      gap: 10px;
+    }
+
+    .welcome .actions button {
+      font-size: 12.5px;
+      padding: 9px 16px;
+    }
+
+    /* 4 Stat Cards */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s ease;
+    }
+
+    .stat {
+      padding: 20px 22px;
+    }
+
+    .stat-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 550;
+    }
+
+    .icon-box {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius-md);
+      background: #eff4fd;
+      color: var(--blue);
+    }
+
+    .icon-box.teal {
+      background: #eef8f6;
+      color: var(--teal);
+    }
+
+    .icon-box.amber {
+      background: #fffaeb;
+      color: var(--amber);
+    }
+
+    .stat-number {
+      font-size: 32px;
+      line-height: 1.2;
+      font-weight: 750;
+      letter-spacing: -0.8px;
+      margin: 12px 0 6px;
+      color: var(--text);
+    }
+
+    .stat-foot {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .stat-foot span {
+      color: var(--teal);
+      font-weight: 500;
+    }
+
+    /* Layout Grid */
+    .grid-main {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 296px;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .stack {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Card Header */
+    .card-head {
+      padding: 20px 22px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .card-head h2 {
+      font-size: 15px;
+      margin: 0 0 3px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.2px;
+    }
+
+    .card-head p {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* Badges */
+    .badge {
+      font-size: 10.5px;
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 650;
+      white-space: nowrap;
+      background: var(--line-subtle);
+      color: var(--text-muted);
+      border: 1px solid transparent;
+    }
+
+    .badge.blue {
+      color: var(--blue);
+      background: var(--blue-light);
+      border-color: var(--blue-border);
+    }
+
+    .badge.teal {
+      color: #047857;
+      background: var(--emerald-light);
+      border-color: var(--emerald-border);
+    }
+
+    .badge.amber {
+      color: #b45309;
+      background: var(--amber-light);
+      border-color: var(--amber-border);
+    }
+
+    .badge.red {
+      color: var(--red);
+      background: var(--red-light);
+      border-color: var(--red-border);
+    }
+
+    .badge.gray {
+      color: var(--text-muted);
+      background: #f1f5f9;
+      border-color: var(--line);
+    }
+
+    /* Case Strip inside Step Card */
+    .case-strip {
+      margin: 0 22px 20px;
+      background: #f8fafc;
+      border: 1px solid #edf0f4;
+      border-radius: var(--radius-md);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      gap: 12px;
+    }
+
+    .case-strip strong {
+      font-size: 13px;
+      font-weight: 650;
+      color: var(--text);
+    }
+
+    .case-strip small {
+      font-size: 11px;
+      display: block;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* 7-Step Stepper */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      padding: 0 16px 20px;
+    }
+
+    .step {
+      position: relative;
+      text-align: center;
+      font-size: 9.5px;
+      color: #64748b;
+      line-height: 1.4;
+      font-weight: 500;
+    }
+
+    .step::before {
+      content: '';
+      height: 2px;
+      background: #e2e8f0;
+      position: absolute;
+      left: -50%;
+      right: 50%;
+      top: 14px;
+      z-index: 0;
+    }
+
+    .step:first-child::before {
+      display: none;
+    }
+
+    .step.done::before, .step.current::before {
+      background: #a5d7ce;
+    }
+
+    .step-dot {
+      position: relative;
+      z-index: 1;
+      width: 28px;
+      height: 28px;
+      border: 1px solid #cbd5e1;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 8px;
+      background: #ffffff;
+      font-weight: 650;
+      font-size: 11px;
+      color: var(--text-subtle);
+    }
+
+    .step-dot svg {
+      width: 13px;
+      height: 13px;
+      stroke-width: 2.2;
+    }
+
+    .step.done .step-dot {
+      background: #e7f5f0;
+      color: #059669;
+      border-color: #a7f3d0;
+    }
+
+    .step.current .step-dot {
+      background: var(--blue);
+      color: #ffffff;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 4px #eff4ff;
+    }
+
+    .step.current {
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    /* Next Step Action Bar */
+    .next-step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #f4f8ff;
+      border-top: 1px solid #e9effa;
+      padding: 13px 22px;
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      font-size: 12px;
+      color: #334e68;
+    }
+
+    .next-step svg {
+      width: 18px;
+      height: 18px;
+      color: var(--blue);
+      stroke-width: 2;
+    }
+
+    .next-step button {
+      margin-left: auto;
+      white-space: nowrap;
+      font-size: 11.5px;
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+    }
+
+    /* Table Tools & Table Styles */
+    .table-tools {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 22px 16px;
+    }
+
+    .table-tools input {
+      width: 100%;
+      max-width: 300px;
+      font-size: 12px;
+      padding: 8px 12px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+    }
+
+    .table-tools select {
+      width: auto;
+      font-size: 12px;
+      padding: 8px 12px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      color: var(--text);
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      width: 100%;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      text-align: left;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    th {
+      color: var(--text-muted);
+      background: #f8fafc;
+      font-size: 10.5px;
+      font-weight: 650;
+      padding: 12px 16px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid #f1f5f9;
+      color: var(--text);
+      vertical-align: middle;
+    }
+
+    tr:hover td {
+      background: #fcfdfe;
+    }
+
+    td:first-child, th:first-child {
+      padding-left: 22px;
+    }
+
+    td:last-child, th:last-child {
+      padding-right: 22px;
+    }
+
+    td strong {
+      font-size: 12.5px;
+      font-weight: 650;
+      color: var(--text);
+    }
+
+    td small {
+      display: block;
+      color: var(--text-muted);
+      font-size: 11px;
+      margin-top: 3px;
+    }
+
+    td.money {
+      font-weight: 650;
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .table-footer {
+      padding: 14px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      border-top: 1px solid #f1f5f9;
+    }
+
+    /* Right Column Widgets */
+    .aside-card .card-head {
+      padding: 18px 20px 14px;
+    }
+
+    .aside-card .card-head svg {
+      color: var(--text-muted);
+    }
+
+    .aside-content {
+      padding: 0 20px 18px;
+    }
+
+    .alert-item {
+      border: 1px solid #edf0f4;
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin-bottom: 12px;
+      display: flex;
+      gap: 12px;
+      background: #ffffff;
+      transition: border-color 0.15s ease;
+    }
+
+    .alert-item:hover {
+      border-color: #cbd5e1;
+    }
+
+    .alert-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .alert-item svg {
+      width: 18px;
+      height: 18px;
+      color: var(--amber);
+      margin-top: 1px;
+    }
+
+    .alert-item strong {
+      font-size: 12.5px;
+      display: block;
+      color: var(--text);
+      font-weight: 650;
+    }
+
+    .alert-item p {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin: 4px 0 8px;
+    }
+
+    .activity {
+      display: flex;
+      gap: 12px;
+      padding-bottom: 18px;
+      position: relative;
+    }
+
+    .activity:last-child {
+      padding-bottom: 4px;
+    }
+
+    .activity .activity-icon {
+      border-radius: 50%;
+      background: #eff6ff;
+      color: #2563eb;
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      z-index: 1;
+      flex-shrink: 0;
+    }
+
+    .activity svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .activity:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 14px;
+      top: 28px;
+      bottom: 0;
+      width: 1px;
+      background: #e2e8f0;
+    }
+
+    .activity strong {
+      font-size: 12px;
+      display: block;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .activity small {
+      display: block;
+      font-size: 10.5px;
+      color: var(--text-subtle);
+      margin-top: 3px;
+    }
+
+    .tip {
+      padding: 20px;
+      background: #eff7f7;
+      border-color: #dfeeed;
+    }
+
+    .tip h3 {
+      font-size: 13px;
+      margin: 0 0 8px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .tip h3 svg {
+      color: var(--teal);
+    }
+
+    .tip p {
+      font-size: 11.5px;
+      color: #476867;
+      line-height: 1.6;
+      margin: 0 0 12px;
+    }
+
+    /* Page Footer */
+    .privacy-footer {
+      font-size: 11px;
+      color: var(--text-subtle);
+      text-align: center;
+      margin: 28px 0 10px;
+      font-weight: 500;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-subtle);
+      margin-top: 14px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      gap: 12px;
+    }
+
+    .footer span {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .footer svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Form Controls */
+    input, select, textarea {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 9px 12px;
+      color: var(--text);
+      background: #ffffff;
+      max-width: 100%;
+      width: 100%;
+      transition: all 0.15s ease;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--blue);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+      line-height: 1.5;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    label.check {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 450;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      margin-bottom: 8px;
+      background: #ffffff;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    label.check:hover {
+      background: var(--line-subtle);
+    }
+
+    input[type=checkbox] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--teal);
+      cursor: pointer;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-grid .wide {
+      grid-column: 1 / -1;
+    }
+
+    .padded {
+      padding: 24px;
+    }
+
+    .page-heading {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .page-heading h1 {
+      font-size: 24px;
+      margin: 0 0 4px;
+    }
+
+    .page-heading p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    .muted {
+      color: var(--text-muted);
+    }
+
+    .notice {
+      padding: 12px 16px;
+      border: 1px solid #dde8f6;
+      background: #f2f7ff;
+      border-radius: var(--radius-md);
+      font-size: 12px;
+      color: #3b597e;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .notice.warning {
+      background: #fff9ed;
+      border-color: #f3e4c6;
+      color: #926620;
+    }
+
+    .notice svg {
+      width: 17px;
+      height: 17px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+    }
+
+    .empty svg {
+      width: 36px;
+      height: 36px;
+      color: var(--text-subtle);
+      margin-bottom: 12px;
+    }
+
+    .empty h3 {
+      color: var(--text);
+      font-size: 15px;
+      margin: 0 0 6px;
+      font-weight: 700;
+    }
+
+    .empty p {
+      font-size: 12px;
+      max-width: 420px;
+      margin: 0 auto 18px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    /* Document Dropzone */
+    .dropzone {
+      border: 2px dashed #cbd9ec;
+      border-radius: var(--radius-lg);
+      background: #f8fbff;
+      text-align: center;
+      padding: 36px 20px;
+      transition: all 0.15s ease;
+    }
+
+    .dropzone.drag {
+      border-color: var(--blue);
+      background: #eff6ff;
+    }
+
+    .dropzone > svg {
+      width: 40px;
+      height: 40px;
+      color: var(--blue);
+      margin-bottom: 6px;
+    }
+
+    .dropzone h3 {
+      margin: 8px 0 4px;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .dropzone p {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin: 0 0 16px;
+    }
+
+    .document {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      flex-wrap: wrap;
+    }
+
+    .document .details {
+      flex: 1;
+      min-width: 140px;
+    }
+
+    .document strong {
+      display: block;
+      font-size: 12.5px;
+      word-break: break-word;
+    }
+
+    .document small {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .document select {
+      width: auto;
+      max-width: 170px;
+      font-size: 11px;
+      padding: 5px 8px;
+    }
+
+    .document svg {
+      color: #4a78ab;
+    }
+
+    .doc-preview {
+      min-height: 500px;
+      background: #eef1f5;
+      border-radius: var(--radius-md);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px;
+      overflow: auto;
+    }
+
+    .paper {
+      background: #ffffff;
+      padding: 32px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+      color: #334155;
+      border-radius: 4px;
+    }
+
+    .paper h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .paper table {
+      white-space: normal;
+      margin: 14px 0;
+    }
+
+    .paper td {
+      padding: 8px 4px;
+    }
+
+    .extracted-field {
+      margin-bottom: 14px;
+    }
+
+    .extracted-field small {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 3px;
+    }
+
+    .progressbar {
+      height: 6px;
+      border-radius: var(--radius-full);
+      background: #eaf0f6;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .progressbar i {
+      display: block;
+      background: var(--teal);
+      height: 100%;
+      border-radius: var(--radius-full);
+    }
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .case-grid h3 {
+      font-size: 14px;
+      margin: 12px 0 6px;
+      font-weight: 700;
+    }
+
+    .case-grid .actions {
+      margin-top: 18px;
+    }
+
+    .draft {
+      min-height: 400px;
+      font-size: 13px;
+      line-height: 1.8;
+      font-family: Georgia, serif;
+      padding: 16px;
+    }
+
+    .help-steps {
+      counter-reset: step;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .help-steps div {
+      padding: 18px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      font-size: 12.5px;
+      font-weight: 600;
+    }
+
+    .help-steps div::before {
+      counter-increment: step;
+      content: counter(step, decimal-leading-zero);
+      display: block;
+      color: var(--teal);
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    details {
+      border-bottom: 1px solid var(--line);
+      padding: 14px 0;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 650;
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    details p {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 8px;
+      line-height: 1.6;
+    }
+
+    /* Dialog Modal */
+    dialog {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      max-width: 560px;
+      width: calc(100% - 32px);
+      box-shadow: var(--shadow-lg);
+      color: var(--text);
+      background: #ffffff;
+      margin: auto;
+    }
+
+    dialog::backdrop {
+      background: rgba(15, 23, 42, 0.45);
+      backdrop-filter: blur(2px);
+    }
+
+    dialog h2 {
+      margin-top: 0;
+      font-size: 18px;
+      font-weight: 750;
+      margin-bottom: 12px;
+    }
+
+    dialog p {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    dialog .actions {
+      justify-content: flex-end;
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      max-width: 400px;
+      background: var(--navy);
+      color: #ffffff;
+      border-radius: var(--radius-md);
+      padding: 12px 18px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      z-index: 100;
+      font-size: 12.5px;
+      font-weight: 500;
+      animation: toast-in 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes toast-in {
+      from { transform: translateY(12px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .space {
+      height: 20px;
+    }
+
+    .error {
+      color: var(--red);
+      font-size: 11.5px;
+      margin-top: 6px;
+    }
+
+    .inline-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 10px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .overlay {
+      display: none;
+    }
+
+    .wizard-top {
+      display: flex;
+      gap: 20px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+    }
+
+    .wizard-top span {
+      font-size: 12px;
+      color: var(--text-subtle);
+      font-weight: 500;
+    }
+
+    .wizard-top .active {
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .wizard-top .complete {
+      color: var(--teal);
+      font-weight: 600;
+    }
+
+    .source-pill {
+      font-size: 10px;
+      background: #f0f4fa;
+      border-radius: 4px;
+      padding: 2px 6px;
+      display: inline-block;
+      color: #657790;
+      font-weight: 500;
+    }
+
+    .item-note {
+      white-space: normal;
+      max-width: 300px;
+      min-width: 150px;
+      font-size: 11.5px;
+      line-height: 1.5;
+    }
+
+    .report-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .report-grid h3 {
+      font-size: 14px;
+      font-weight: 700;
+      margin: 10px 0 4px;
+    }
+
+    .report-grid p {
+      font-size: 11.5px;
+      min-height: 46px;
+    }
+
+    .audit-mini {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .audit-mini .card {
+      padding: 16px;
+    }
+
+    .audit-mini strong {
+      font-size: 22px;
+      display: block;
+      margin: 6px 0 2px;
+      font-weight: 750;
+    }
+
+    .audit-mini small {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .note-text {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .page-selector {
+      width: auto;
+      max-width: 340px;
+      font-size: 12px;
+      padding: 6px 10px;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE BREAKPOINTS
+       ========================================================================== */
+    @media (min-width: 1450px) {
+      .main {
+        padding: 30px 40px;
+      }
+      .grid-main {
+        grid-template-columns: minmax(0, 1fr) 310px;
+      }
+      .welcome h1 {
+        font-size: 32px;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      .sidebar {
+        width: 220px;
+      }
+      .shell {
+        margin-left: 220px;
+      }
+      .main {
+        padding: 20px;
+      }
+      .topbar {
+        padding: 0 20px;
+      }
+      .grid-main {
+        grid-template-columns: minmax(0, 1fr) 260px;
+      }
+      .top-search {
+        width: 220px;
+      }
+      .case-grid, .report-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 1000px) {
+      .sidebar {
+        width: 200px;
+      }
+      .shell {
+        margin-left: 200px;
+      }
+      .grid-main {
+        grid-template-columns: 1fr;
+      }
+      .grid-main > .stack:last-child {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+      .tip {
+        grid-column: 1 / -1;
+      }
+      .top-search {
+        display: none;
+      }
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .welcome {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+      }
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+      .help-steps {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .sidebar, .collapsed .sidebar {
+        width: 260px;
+        transform: translateX(-100%);
+        transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+      .shell, .collapsed .shell {
+        margin-left: 0;
+      }
+      .mobile-toggle {
+        display: inline-flex;
+      }
+      .mobile-open .sidebar {
+        transform: translateX(0);
+      }
+      .mobile-open .overlay {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.5);
+        backdrop-filter: blur(2px);
+        z-index: 29;
+      }
+      .topbar {
+        height: 64px;
+        padding: 0 16px;
+        gap: 10px;
+      }
+      .top-actions .help-top, .top-actions .avatar {
+        display: none;
+      }
+      .top-actions .primary {
+        padding: 6px 10px;
+        font-size: 11px;
+        height: 34px;
+      }
+      .main {
+        padding: 16px;
+      }
+      .demo-banner {
+        font-size: 11px;
+        margin-bottom: 18px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .demo-banner button {
+        margin-left: 0;
+      }
+      .welcome h1 {
+        font-size: 24px;
+      }
+      .stats {
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+      .stat {
+        padding: 16px;
+      }
+      .stat-number {
+        font-size: 26px;
+      }
+      .grid-main > .stack:last-child {
+        display: flex;
+      }
+      .steps {
+        padding: 0 6px 16px;
+      }
+      .step {
+        font-size: 8px;
+      }
+      .step-dot {
+        width: 24px;
+        height: 24px;
+      }
+      .step::before {
+        top: 12px;
+      }
+      .next-step {
+        padding: 12px;
+        flex-wrap: wrap;
+      }
+      .case-strip {
+        margin: 0 14px 16px;
+      }
+      .table-tools {
+        padding: 0 14px 14px;
+        flex-wrap: wrap;
+      }
+      .table-tools input {
+        max-width: none;
+      }
+      .footer {
+        flex-direction: column;
+      }
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      .form-grid .wide {
+        grid-column: auto;
+      }
+      .padded {
+        padding: 16px;
+      }
+      .page-heading {
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+      .case-grid, .report-grid {
+        grid-template-columns: 1fr;
+      }
+      .audit-mini {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .toast {
+        right: 16px;
+        left: 16px;
+        bottom: 16px;
+        max-width: none;
+      }
+    }
+
+    @media print {
+      .sidebar, .topbar, .demo-banner, .footer, button, .toast {
+        display: none !important;
+      }
+      .shell {
+        margin: 0;
+      }
+      .main {
+        padding: 0;
+      }
+      .card {
+        box-shadow: none;
+        border: 1px solid #ccc;
+      }
+      .draft {
+        border: none;
+        height: auto;
+      }
+      .notice {
+        background: #ffffff;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Overlay for Mobile Drawer -->
+  <div class="overlay" onclick="document.body.classList.remove('mobile-open')"></div>
+
+  <!-- Main Left Sidebar -->
+  <aside class="sidebar" id="sidebar"></aside>
+
+  <!-- Content Shell -->
+  <div class="shell">
+    <header class="topbar" id="topbar"></header>
+    <main class="main" id="main"></main>
+  </div>
+
+  <!-- Reusable Dialog & Toast -->
+  <dialog id="dialog"></dialog>
+  <div id="toast-root" role="status" aria-live="polite"></div>
+
+  <!-- Core Prototype Logic -->
+  <script>
+    'use strict';
+
+    /* SVG Icon Definitions */
+    const icons = {
+      overview: 'M3 3h7v7H3z M14 3h7v7h-7z M3 14h7v7H3z M14 14h7v7h-7z',
+      cases: 'M3 7h6l2-3h4l2 3h4v13H3z',
+      plus: 'M12 5v14 M5 12h14',
+      upload: 'M12 16V3 M7 8l5-5 5 5 M4 16v5h16v-5',
+      audit: 'M9 3H5v18h14V3h-4 M9 3v4h6V3z M8 12l2 2 5-5 M8 18h8',
+      price: 'M20 12l-8 8L3 11V3h8z M7 7h.01',
+      evidence: 'M3 5h7l2 3h9v12H3z M8 12h8 M8 16h5',
+      complaint: 'M4 3h16v14H9l-5 4z M8 7h8 M8 11h6',
+      affidavit: 'M5 3h10l4 4v14H5z M14 3v5h5 M8 12h8 M8 16h6',
+      reports: 'M5 3h10l4 4v14H5z M14 3v5h5 M8 17v-3 M12 17v-6 M16 17v-4',
+      help: 'M9 9a3 3 0 1 1 4 3c-1 0-1 1-1 2 M12 17h.01 M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0',
+      settings: 'M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8 M9 3h6l1 3 3 1 2 5-2 4-3 1-1 4H9l-1-4-3-1-2-4 2-5 3-1z',
+      search: 'M21 21l-5-5 M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0',
+      bell: 'M18 8a6 6 0 0 0-12 0v7l-2 3h16l-2-3z M10 21h4',
+      chevron: 'M9 5l7 7-7 7',
+      left: 'M15 5l-7 7 7 7',
+      check: 'M5 12l4 4L19 6',
+      shield: 'M12 3l8 3v6c0 5-8 9-8 9s-8-4-8-9V6z M8 12l3 3 5-6',
+      clock: 'M12 7v5l3 2 M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0',
+      info: 'M12 11v6 M12 7h.01 M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0',
+      warning: 'M12 3L2 21h20z M12 9v5 M12 17h.01',
+      file: 'M5 3h9l5 5v13H5z M14 3v5h5 M8 12h8 M8 16h5',
+      download: 'M12 3v13 M7 11l5 5 5-5 M4 17v4h16v-4',
+      menu: 'M3 6h18 M3 12h18 M3 18h18',
+      close: 'M5 5l14 14 M19 5L5 19',
+      eye: 'M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12 M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0',
+      arrow: 'M4 12h16 M15 7l5 5-5 5',
+      lock: 'M6 10h12v11H6z M8 10V6a4 4 0 0 1 8 0v4',
+      grid: 'M3 3h7v7H3z M14 3h7v7h-7z M3 14h7v7H3z M14 14h7v7h-7z',
+      list: 'M8 6h13 M8 12h13 M8 18h13 M3 6h.01 M3 12h.01 M3 18h.01',
+      heart: 'M12 21L3 12C-2 4 8 0 12 7c4-7 14-3 9 5z',
+      edit: 'M14 5l5 5 M4 20l1-6L16 3l5 5-11 11z',
+      trash: 'M3 6h18 M8 6V3h8v3 M5 6l1 15h12l1-15 M10 10v7 M14 10v7',
+      logout: 'M9 4H4v16h5 M12 12h10 M18 8l4 4-4 4'
+    };
+
+    const icon = (name, cls = '') => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true"><path d="${icons[name] || icons.file}"/></svg>`;
+    const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const money = n => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(Number(n) || 0);
+
+    const navs = [
+      ['overview', 'Overview'],
+      ['cases', 'My Cases'],
+      ['new', 'Create New Case'],
+      ['upload', 'Upload Documents'],
+      ['audit', 'Bill Audit'],
+      ['price', 'Price Verification'],
+      ['evidence', 'Evidence Center'],
+      ['complaint', 'Complaint Assistant'],
+      ['affidavit', 'Affidavit Draft Assistant'],
+      ['reports', 'Reports & Exports'],
+      ['help', 'Help & Support'],
+      ['settings', 'Settings']
+    ];
+
+    let demo = true;
+    let route = 'overview';
+    let activeId = 'BS-1024';
+    let page = 1;
+    let caseView = 'table';
+    let search = '';
+    let filter = 'all';
+    let sort = 'updated';
+    let wizardStep = 1;
+    let wizard = {};
+    let pending = [];
+    let docUrls = new Map();
+    let ocrEdits = {};
+    let drafts = {};
+    let auditFilter = 'all';
+
+    const sampleCases = [
+      {
+        id: 'BS-1024',
+        name: 'Hospital Bill Review — Sample Case',
+        hospital: 'Greenfield Care Hospital',
+        city: 'Pune',
+        amount: 84500,
+        date: '2026-10-26',
+        updated: '2026-10-27',
+        stage: 'Needs Review',
+        progress: 3,
+        description: 'Review an itemized inpatient bill.',
+        insurance: 'Partially insured',
+        objectives: ['Check arithmetic and duplicate charges.']
+      },
+      {
+        id: 'BS-1023',
+        name: 'Discharge Invoice Check — Demo Case',
+        hospital: 'Meadowbrook Medical Center',
+        city: 'Jaipur',
+        amount: 32600,
+        date: '2026-10-23',
+        updated: '2026-10-25',
+        stage: 'Audit Completed',
+        progress: 4,
+        description: 'Check discharge invoice entries.',
+        insurance: 'Self-paid',
+        objectives: ['Understand my hospital bill.']
+      },
+      {
+        id: 'BS-1022',
+        name: 'Insurance Settlement Review — Demo Case',
+        hospital: 'Willow Health Clinic',
+        city: 'Bengaluru',
+        amount: 56750,
+        date: '2026-10-20',
+        updated: '2026-10-24',
+        stage: 'Awaiting Documents',
+        progress: 1,
+        description: 'Organize insurance settlement documents.',
+        insurance: 'Insured',
+        objectives: ['Understand insurance deductions or rejection.']
+      }
+    ];
+
+    const sampleDocs = [
+      { id: 'DOC-01', caseId: 'BS-1024', name: 'Itemized hospital bill · sample', category: 'Hospital bills and itemized invoices', status: 'Review Required', sample: true, size: 0, page: 1 },
+      { id: 'DOC-02', caseId: 'BS-1024', name: 'Discharge summary · sample', category: 'Discharge summaries', status: 'Completed', sample: true, size: 0, page: 1 },
+      { id: 'DOC-03', caseId: 'BS-1024', name: 'Payment receipt · sample', category: 'Payment receipts', status: 'Completed', sample: true, size: 0, page: 1 },
+      { id: 'DOC-04', caseId: 'BS-1023', name: 'Discharge invoice · sample', category: 'Hospital bills and itemized invoices', status: 'Completed', sample: true, size: 0, page: 1 },
+      { id: 'DOC-05', caseId: 'BS-1023', name: 'Prescription · sample', category: 'Prescriptions', status: 'Completed', sample: true, size: 0, page: 1 }
+    ];
+
+    const sampleFindings = [
+      { id: 'F-01', caseId: 'BS-1024', name: 'Similar diagnostic entries', amount: 2500, why: 'Two CBC entries have matching descriptions and quantities. Confirm the service times before deciding whether these are duplicates.', doc: 'DOC-01', page: 1, status: 'Possible Duplicate', type: 'duplicate' },
+      { id: 'F-02', caseId: 'BS-1024', name: 'Subtotal does not match entries', amount: 500, why: 'Illustrative line-item total is ₹84,000; the final billed total is ₹84,500. Ask whether an adjustment or omitted line explains the ₹500 difference.', doc: 'DOC-01', page: 1, status: 'Arithmetic Mismatch', type: 'arithmetic' },
+      { id: 'F-03', caseId: 'BS-1024', name: 'Package terms not available', amount: null, why: 'Package documents were not provided. Request the applicable inclusion and exclusion schedule before comparing charges.', doc: 'DOC-01', page: 1, status: 'Information Missing', type: 'package' },
+      { id: 'F-04', caseId: 'BS-1023', name: 'Medicine description needs clarification', amount: null, why: 'An abbreviated medicine description needs confirmation against the prescription.', doc: 'DOC-04', page: 1, status: 'Resolved by User', type: 'medical' }
+    ];
+
+    let demoState = { cases: structuredClone(sampleCases), docs: structuredClone(sampleDocs), findings: structuredClone(sampleFindings), notes: {}, activity: [] };
+    let localState = { cases: [], docs: [], findings: [], notes: {}, activity: [] };
+
+    const state = () => demo ? demoState : localState;
+    const current = () => state().cases.find(c => c.id === activeId) || state().cases[0];
+    const docs = () => state().docs.filter(d => d.caseId === current()?.id);
+    const findings = () => state().findings.filter(f => f.caseId === current()?.id);
+
+    const stages = ['Case Created', 'Documents Uploaded', 'Information Reviewed', 'Bill Audit Completed', 'Evidence Organized', 'Complaint Draft Prepared', 'Final Review'];
+    const categories = ['Hospital bills and itemized invoices', 'Payment receipts', 'Prescriptions', 'Diagnostic reports', 'Discharge summaries', 'Pharmacy invoices', 'Insurance settlement letters', 'Insurance rejection letters', 'Hospital package or estimate documents', 'Other supporting documents'];
+    const objectiveOptions = ['Understand my hospital bill.', 'Check arithmetic and duplicate charges.', 'Compare billed items with medical documents.', 'Review package inclusions and exclusions.', 'Understand insurance deductions or rejection.', 'Check applicable pricing references.', 'Organize evidence for a complaint.'];
+
+    function badge(text) {
+      let color = /Completed|Resolved|Ready|Reviewed/.test(text) ? 'teal' :
+                  /Review|Mismatch|Duplicate|Missing/.test(text) ? 'amber' :
+                  /Failed/.test(text) ? 'red' : 'blue';
+      return `<span class="badge ${color}">${esc(text)}</span>`;
+    }
+
+    function btn(label, action, cls = '', ico = '') {
+      return `<button class="${cls}" onclick="${action}">${ico ? icon(ico) : ''}${label}</button>`;
+    }
+
+    function toast(text) {
+      const root = document.getElementById('toast-root');
+      root.innerHTML = `<div class="toast">${esc(text)}</div>`;
+      clearTimeout(window.toastTimer);
+      window.toastTimer = setTimeout(() => {
+        root.innerHTML = '';
+      }, 4500);
+    }
+
+    function modal(title, body, actions = '') {
+      let d = document.getElementById('dialog');
+      d.innerHTML = `<h2>${esc(title)}</h2>${body}<div class="actions">${btn('Close', "document.getElementById('dialog').close()")}${actions}</div>`;
+      if (!d.open) d.showModal();
+    }
+
+    function go(r, id) {
+      route = r;
+      if (id) activeId = id;
+      search = '';
+      filter = 'all';
+      page = 1;
+      document.body.classList.remove('mobile-open');
+      location.hash = r;
+      render();
+      window.scrollTo(0, 0);
+    }
+
+    function selectCase(id) {
+      activeId = id;
+      pending = [];
+      selectedDoc = undefined;
+      render();
+    }
+
+    function selector() {
+      return state().cases.length ?
+        `<label class="sr-only" for="active-case">Active case</label>
+         <select id="active-case" class="page-selector" onchange="selectCase(this.value)">
+           ${state().cases.map(c => `<option value="${esc(c.id)}" ${current()?.id === c.id ? 'selected' : ''}>${esc(c.id)} · ${esc(c.name)}</option>`).join('')}
+         </select>` : '';
+    }
+
+    function addActivity(text) {
+      state().activity.unshift({
+        text,
+        caseId: current()?.id,
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      });
+    }
+
+    function render() {
+      if (!state().cases.find(c => c.id === activeId)) activeId = state().cases[0]?.id;
+      renderNav();
+      renderTop();
+      const main = document.getElementById('main');
+      main.innerHTML = `
+        <div class="demo-banner">
+          ${icon(demo ? 'info' : 'lock')}
+          <span><strong>${demo ? 'Demo Data — Not a Real Patient Record' : 'Local workspace — No backend connected'}</strong> ${demo ? 'Fictional records and illustrative audit results.' : 'Files stay in this browser tab. OCR, server upload and AI auditing are unavailable.'}</span>
+          ${btn(demo ? 'Use empty workspace' : 'Explore demo', 'switchMode()')}
+        </div>
+        ${({
+          overview: overview,
+          cases: casesPage,
+          new: newPage,
+          upload: uploadPage,
+          review: reviewPage,
+          audit: auditPage,
+          price: pricePage,
+          evidence: evidencePage,
+          complaint: () => draftPage('complaint'),
+          affidavit: () => draftPage('affidavit'),
+          reports: reportsPage,
+          help: helpPage,
+          settings: settingsPage,
+          detail: detailPage
+        }[route] || overview)()}
+        <footer class="footer">
+          <span>${icon('shield')} Designed around clarity, evidence and your privacy.</span>
+          <span>Bill Saathi AI · Patient assistance workspace</span>
+        </footer>
+      `;
+      if (route === 'upload' && document.getElementById('dropzone')) wireDrop();
+      if (route === 'new') bindWizard();
+      if (route === 'evidence' && document.getElementById('evidence-table')) updateEvidence();
+      if (route === 'cases') updateCases();
+    }
+
+    function renderNav() {
+      document.getElementById('sidebar').innerHTML = `
+        <div class="brand">
+          <span class="brand-mark">${icon('audit')}</span>
+          <span class="brand-copy">Bill Saathi <span style="color:var(--teal)">AI</span><small>YOUR PATIENT ALLY</small></span>
+        </div>
+        <div class="nav-label">WORKSPACE</div>
+        <nav class="nav" aria-label="Main navigation">
+          ${navs.map(([r, l], i) => `
+            <div class="${i === 10 ? 'separate' : ''}">
+              ${btn(`<span>${l}</span>`, `go('${r}')`, route === r || (r === 'cases' && route === 'detail') ? 'active' : '', r === 'new' ? 'plus' : r)}
+            </div>
+          `).join('')}
+        </nav>
+        <div class="sidebar-footer">
+          <div class="profile">
+            <span class="avatar">${demo ? 'DP' : 'LW'}</span>
+            <div class="profile-copy">
+              <strong>${demo ? 'Demo patient' : 'Local workspace'}</strong>
+              <small>${demo ? 'Sample account' : 'Session only · not signed in'}</small>
+            </div>
+          </div>
+          ${btn(`${icon('left')}<span class="collapse-label">Collapse sidebar</span>`, "document.body.classList.toggle('collapsed')", 'collapse-btn')}
+        </div>
+      `;
+    }
+
+    function renderTop() {
+      let title = route === 'review' ? 'Document Review' :
+                  route === 'detail' ? 'Case Workspace' :
+                  navs.find(x => x[0] === route)?.[1] || 'Overview';
+      document.getElementById('topbar').innerHTML = `
+        ${btn(icon('menu'), "document.body.classList.toggle('mobile-open')", 'icon-btn mobile-toggle')}
+        <div class="crumb">
+          <strong>${title}</strong>
+          Workspace <span style="margin:0 4px;color:#bcc6d2">/</span> ${title}
+        </div>
+        <form class="top-search" onsubmit="event.preventDefault();globalSearch(this.q.value)">
+          ${icon('search')}
+          <input name="q" aria-label="Search cases or documents" placeholder="Search cases or documents…">
+        </form>
+        <div class="top-actions">
+          ${btn(icon('bell'), 'notifications()', 'ghost icon-btn')}
+          ${btn(icon('help'), "go('help')", 'ghost icon-btn help-top')}
+          <button class="avatar" onclick="profileMenu()" aria-label="Profile menu">${demo ? 'DP' : 'LW'}</button>
+          ${btn('New Case', "wizard={};wizardStep=1;go('new')", 'primary', 'plus')}
+        </div>
+      `;
+      document.querySelector('.mobile-toggle')?.setAttribute('aria-label', 'Open navigation');
+      document.querySelector('.top-actions button')?.setAttribute('aria-label', 'Notifications');
+    }
+
+    function switchMode() {
+      modal('Switch workspace', `
+        <p>${demo ? 'Open an empty, session-only workspace. No real data is sent to a server.' : 'Return to fictional demonstration records.'} Your current session is retained separately until you reload the page.</p>
+      `, btn('Switch workspace', "demo=!demo;drafts={};activeId=state().cases[0]?.id;document.getElementById('dialog').close();go('overview')", 'primary'));
+    }
+
+    function globalSearch(q) {
+      go('cases');
+      search = q;
+      const el = document.getElementById('case-search');
+      if (el) el.value = q;
+      updateCases();
+    }
+
+    function notifications() {
+      let list = prefs.notifications ? state().cases.filter(c => c.stage === 'Needs Review' || c.stage === 'Awaiting Documents') : [];
+      modal('Your next steps', list.length ? list.map(c => `
+        <p><strong>${esc(c.id)}</strong> · ${esc(c.stage)}<br>
+        <span class="muted">${c.stage === 'Needs Review' ? 'Confirm extracted details before continuing.' : 'Add the documents needed for this case.'}</span></p>
+      `).join('') : '<p>No pending case notifications.</p>');
+    }
+
+    function profileMenu() {
+      modal('Your workspace', `
+        <p>${demo ? 'You are exploring a fictional demonstration account.' : 'This is an unsigned local browser session.'} Authentication and cloud storage are not connected.</p>
+      `, btn('Open settings', "document.getElementById('dialog').close();go('settings')", 'primary'));
+    }
+
+    /* ==========================================================================
+       DASHBOARD OVERVIEW VIEW
+       ========================================================================== */
+    function overview() {
+      let s = state(), c = current(), unresolved = s.findings.filter(f => f.status !== 'Resolved by User').length;
+      return `
+        <section class="welcome">
+          <div>
+            <div class="eyebrow">YOUR MEDICAL BILL WORKSPACE</div>
+            <h1>Welcome back!</h1>
+            <p>Manage your medical bills, review possible discrepancies, and organize your supporting documents in one place.</p>
+          </div>
+          <div class="actions">
+            ${btn('Start New Bill Review', "wizard={};wizardStep=1;go('new')", 'primary', 'plus')}
+            ${btn('View My Cases', "go('cases')")}
+          </div>
+        </section>
+
+        <div class="stats">
+          ${[
+            ['Total Cases', s.cases.length, 'cases', 'All your reviews, in one place'],
+            ['Documents Uploaded', s.docs.length, 'file', demo ? 'Fictional sample documents' : 'Local selections · not server uploads'],
+            ['Bills Reviewed', s.cases.filter(c => c.progress >= 4).length, 'audit', demo ? 'Illustrative completed audit' : 'Confirmed completed audits'],
+            ['Potential Issues Flagged', unresolved, 'warning', 'Findings that need a closer look']
+          ].map(([t, n, i, f], j) => `
+            <div class="card stat">
+              <div class="stat-head">
+                ${t}
+                <span class="icon-box ${j === 2 ? 'teal' : j === 3 ? 'amber' : ''}">${icon(i)}</span>
+              </div>
+              <div class="stat-number">${n.toString().padStart(2, '0')}</div>
+              <div class="stat-foot">${f} ${demo ? '<span>· Sample</span>' : ''}</div>
+            </div>
+          `).join('')}
+        </div>
+
+        <div class="grid-main">
+          <div class="stack">
+            <!-- Stepper Card -->
+            <section class="card">
+              <div class="card-head">
+                <div>
+                  <h2>Your case, one step at a time</h2>
+                  <p>A clear path from your first bill to an informed next step.</p>
+                </div>
+                ${c ? badge('In progress') : ''}
+              </div>
+              ${c ? `
+                <div class="case-strip">
+                  <div>
+                    <strong>${esc(c.name)}</strong>
+                    <small>${c.id} <span style="margin:0 5px">·</span> ${esc(c.hospital)} ${demo ? '· Demo Data' : ''}</small>
+                  </div>
+                  ${btn('View case', "go('detail')", 'text-link', 'chevron')}
+                </div>
+                ${progress(c)}
+                <div class="next-step">
+                  ${icon('info')}
+                  <span><strong>Next step:</strong> ${esc(nextAction(c)[0])}</span>
+                  ${btn(nextAction(c)[1], `go('${nextAction(c)[2]}')`, 'primary')}
+                </div>
+              ` : empty('No cases yet', 'Start with a case to organize your bill review.', "go('new')", 'Create a case')}
+            </section>
+
+            <!-- Recent Cases Table Card -->
+            <section class="card">
+              <div class="card-head">
+                <div>
+                  <h2>Recent cases</h2>
+                  <p>Your latest medical bill reviews.</p>
+                </div>
+                ${btn('View all cases', "go('cases')", 'text-link', 'arrow')}
+              </div>
+              <div class="table-tools">
+                <input aria-label="Search recent cases" placeholder="Search by case name or ID…" oninput="overviewSearch(this.value)">
+                <select aria-label="Filter recent cases" onchange="overviewFilter(this.value)">
+                  <option value="all">All statuses</option>
+                  <option>Needs Review</option>
+                  <option>Audit Completed</option>
+                  <option>Awaiting Documents</option>
+                </select>
+              </div>
+              <div id="overview-table">${caseTable(s.cases.slice(0, 3), false)}</div>
+              <div class="table-footer">
+                <span>${s.cases.length} ${demo ? 'sample ' : ''}cases in your workspace</span>
+                ${btn('Manage cases', "go('cases')", 'text-link')}
+              </div>
+            </section>
+          </div>
+
+          <div class="stack">
+            <!-- Needs Your Attention Widget -->
+            <section class="card aside-card">
+              <div class="card-head">
+                <h2>Needs your attention</h2>
+                ${icon('bell')}
+              </div>
+              <div class="aside-content">
+                ${c && docs().some(d => d.status === 'Review Required') ? `
+                  <div class="alert-item">
+                    ${icon('warning')}
+                    <div>
+                      <strong>Bill details need confirmation</strong>
+                      <p>Review extracted information before continuing with your audit.</p>
+                      ${btn('Review documents', "go('review')", 'text-link', 'arrow')}
+                    </div>
+                  </div>
+                ` : ''}
+                ${unresolved ? `
+                  <div class="alert-item">
+                    ${icon('search')}
+                    <div>
+                      <strong>${unresolved} findings to review</strong>
+                      <p>Check the source documents. A flag is a question, not a conclusion.</p>
+                      ${btn('Explore findings', "go('audit')", 'text-link', 'arrow')}
+                    </div>
+                  </div>
+                ` : '<p class="note-text">No unresolved findings in this workspace.</p>'}
+              </div>
+            </section>
+
+            <!-- Recent Activity Widget -->
+            <section class="card aside-card">
+              <div class="card-head">
+                <h2>Recent activity</h2>
+                ${demo ? '<span class="badge gray">Sample</span>' : ''}
+              </div>
+              <div class="aside-content">
+                ${activityHtml()}
+              </div>
+            </section>
+
+            <!-- Tip Card -->
+            <section class="card tip">
+              <h3>${icon('shield')} A little clarity goes a long way.</h3>
+              <p>A flagged charge doesn't always mean an error. Review the supporting documents and ask your provider for clarification.</p>
+              ${btn('Understand your bill', "go('help')", 'text-link', 'arrow')}
+            </section>
+          </div>
+        </div>
+
+        <div class="privacy-footer">Understand Your Bill. Verify the Charges. Know Your Next Step.</div>
+      `;
+    }
+
+    function overviewSearch(q) {
+      search = q;
+      document.getElementById('overview-table').innerHTML = caseTable(filteredCases().slice(0, 3), false);
+    }
+
+    function overviewFilter(v) {
+      filter = v;
+      overviewSearch(search);
+    }
+
+    function activityHtml() {
+      let a = [...state().activity];
+      if (demo) a.push(
+        { text: 'Possible duplicate charge flagged', time: 'Sample · 27 Oct 2026' },
+        { text: 'Bill details ready for review', time: 'Sample · 27 Oct 2026' },
+        { text: 'Sample documents added', time: 'Sample · 26 Oct 2026' }
+      );
+      return a.length ? a.slice(0, 4).map((x, i) => `
+        <div class="activity">
+          <div class="activity-icon">${icon(i ? 'file' : 'audit')}</div>
+          <div>
+            <strong>${esc(x.text)}</strong>
+            <small>${esc(x.time)}</small>
+          </div>
+        </div>
+      `).join('') : '<p class="note-text">Activity will appear as you work on your cases.</p>';
+    }
+
+    function progress(c) {
+      let p = c.progress;
+      return `
+        <div class="steps">
+          ${stages.map((s, i) => `
+            <div class="step ${i < p ? 'done' : i === p ? 'current' : ''}" title="${esc(stageHelp(i))}">
+              <div class="step-dot">${i < p ? icon('check') : i + 1}</div>
+              ${s.replace(' ', '<br>')}
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function stageHelp(i) {
+      return [
+        'Add your case details.',
+        'Select billing and medical documents.',
+        'Confirm extracted fields and source references.',
+        'Connect the audit service or inspect sample findings.',
+        'Link documents and record notes.',
+        'Prepare and edit a factual draft.',
+        'Review every claim and unresolved question.'
+      ][i];
+    }
+
+    function nextAction(c) {
+      if (c.progress < 2) return ['Add billing and supporting documents.', 'Add documents', 'upload'];
+      if (c.progress < 4) return ['Review the bill details and confirm the source information.', 'Review details', 'review'];
+      if (c.progress < 5) return ['Organize the documents supporting each finding.', 'Organize evidence', 'evidence'];
+      return ['Check your draft and unresolved questions.', 'Review draft', 'complaint'];
+    }
+
+    function empty(title, desc, action, label) {
+      return `
+        <div class="empty">
+          ${icon('file')}
+          <h3>${title}</h3>
+          <p>${desc}</p>
+          ${action ? btn(label, action, 'primary') : ''}
+        </div>
+      `;
+    }
+
+    function caseTable(list, manage = true) {
+      if (!list.length) return empty('No cases found', 'Create a case or adjust your search and filters.', "go('new')", 'Create a case');
+      return `
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>CASE / PROVIDER</th>
+                <th>BILL AMOUNT</th>
+                <th>LAST UPDATED</th>
+                <th>CURRENT STAGE</th>
+                <th>ACTION</th>
+                ${manage ? '<th></th>' : ''}
+              </tr>
+            </thead>
+            <tbody>
+              ${list.map(c => `
+                <tr>
+                  <td>
+                    <strong>${esc(c.name)}</strong>
+                    <small>${esc(c.id)} · ${esc(c.hospital)} ${demo ? '· Demo Data' : ''}</small>
+                  </td>
+                  <td class="money">${money(c.amount)}</td>
+                  <td>${date(c.updated)}</td>
+                  <td>${badge(c.stage)}</td>
+                  <td>${btn('View case', `go('detail','${c.id}')`, 'text-link')}</td>
+                  ${manage ? `<td>${btn(icon('trash'), `deleteCase('${c.id}')`, 'ghost small danger')}</td>` : ''}
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function date(s) {
+      return s ? new Date(s + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Not provided';
+    }
+
+    function filteredCases() {
+      return state().cases.filter(c =>
+        (c.name + ' ' + c.id + ' ' + c.hospital).toLowerCase().includes(search.toLowerCase()) &&
+        (filter === 'all' || c.stage === filter)
+      ).sort((a, b) =>
+        sort === 'amount' ? b.amount - a.amount :
+        sort === 'name' ? a.name.localeCompare(b.name) :
+        b.updated.localeCompare(a.updated)
+      );
+    }
+
+    function heading(title, sub, extra = '') {
+      return `
+        <div class="page-heading">
+          <div>
+            <h1>${title}</h1>
+            <p>${sub}</p>
+          </div>
+          ${extra}
+        </div>
+      `;
+    }
+
+    /* ==========================================================================
+       CASES MANAGEMENT VIEW
+       ========================================================================== */
+    function casesPage() {
+      return `
+        ${heading('My cases', 'A clear view of every bill review in your workspace.', btn('Create New Case', "wizard={};wizardStep=1;go('new')", 'primary', 'plus'))}
+        <div class="card">
+          <div class="card-head">
+            <div class="row">
+              <span class="badge gray">${state().cases.length} cases</span>
+              ${demo ? '<span class="badge teal">Demo Data</span>' : ''}
+            </div>
+            <div class="row">
+              ${btn(icon('list'), "caseView='table';updateCases()", 'small')}
+              ${btn(icon('grid'), "caseView='grid';updateCases()", 'small')}
+            </div>
+          </div>
+          <div class="table-tools">
+            <input id="case-search" aria-label="Search cases" placeholder="Search case name, ID or hospital…" oninput="search=this.value;page=1;updateCases()">
+            <select aria-label="Filter by case stage" onchange="filter=this.value;page=1;updateCases()">
+              <option value="all">All statuses</option>
+              ${['Draft', 'Awaiting Documents', 'Processing', 'Needs Review', 'Audit Completed', 'Draft Prepared', 'Ready for Export'].map(x => `<option>${x}</option>`).join('')}
+            </select>
+            <select aria-label="Sort cases" onchange="sort=this.value;updateCases()">
+              <option value="updated">Recently updated</option>
+              <option value="amount">Highest amount</option>
+              <option value="name">Case name A–Z</option>
+            </select>
+          </div>
+          <div id="cases-result"></div>
+        </div>
+      `;
+    }
+
+    function updateCases() {
+      let list = filteredCases(), n = 5, start = (page - 1) * n, shown = list.slice(start, start + n);
+      document.getElementById('cases-result').innerHTML = (
+        caseView === 'table' ? caseTable(shown) : `
+          <div class="case-grid padded">
+            ${shown.map(c => `
+              <div class="card padded">
+                ${badge(c.stage)}
+                <h3>${esc(c.name)}</h3>
+                <p class="muted">${esc(c.id)} · ${esc(c.hospital)}</p>
+                <strong>${money(c.amount)}</strong>
+                <div class="progressbar"><i style="width:${(c.progress / 7) * 100}%"></i></div>
+                <p class="muted">${c.progress} of 7 stages ${demo ? '· Demo Data' : ''}</p>
+                <div class="actions">
+                  ${btn('Open case', `go('detail','${c.id}')`, 'primary')}
+                  ${btn('Delete', `deleteCase('${c.id}')`, 'danger')}
+                </div>
+              </div>
+            `).join('') || empty('No matching cases', 'Adjust your search or status filter.')}
+          </div>
+        `
+      ) + `
+        <div class="table-footer">
+          <span>${list.length ? start + 1 : 0}–${Math.min(start + n, list.length)} of ${list.length} cases</span>
+          <div class="row">
+            <button ${page <= 1 ? 'disabled' : ''} onclick="page--;updateCases()">Previous</button>
+            <span>Page ${page}</span>
+            <button ${start + n >= list.length ? 'disabled' : ''} onclick="page++;updateCases()">Next</button>
+          </div>
+        </div>
+      `;
+
+      document.querySelectorAll('button').forEach(b => {
+        if (!b.textContent.trim() && b.innerHTML.includes('svg')) {
+          b.setAttribute('aria-label', b.getAttribute('onclick')?.includes('deleteCase') ? 'Delete case' : b.getAttribute('onclick')?.includes('grid') ? 'Grid view' : 'Table view');
+        }
+      });
+    }
+
+    function deleteCase(id) {
+      modal('Delete this case?', `
+        <p>This removes the case and its documents from this ${demo ? 'demo' : 'local'} session. It does not delete anything from a server.</p>
+      `, btn('Delete case', `confirmDelete('${id}')`, 'danger'));
+    }
+
+    function confirmDelete(id) {
+      state().docs.filter(d => d.caseId === id).forEach(d => {
+        if (docUrls.has(d.id)) {
+          URL.revokeObjectURL(docUrls.get(d.id));
+          docUrls.delete(d.id);
+        }
+      });
+      state().cases = state().cases.filter(c => c.id !== id);
+      state().docs = state().docs.filter(d => d.caseId !== id);
+      state().findings = state().findings.filter(f => f.caseId !== id);
+      document.getElementById('dialog').close();
+      go('cases');
+      toast('Case removed from this browser session.');
+    }
+
+    /* ==========================================================================
+       CASE DETAIL VIEW
+       ========================================================================== */
+    function detailPage() {
+      let c = current();
+      if (!c) return empty('No case selected', 'Create a case to begin.', "go('new')", 'Create a case');
+      return `
+        ${heading(esc(c.name), `${esc(c.id)} · ${esc(c.hospital)} ${demo ? '· Demo Data' : ''}`, btn('Edit case', "wizard={...current()};wizardStep=1;go('new')", '', 'edit'))}
+        <div class="stats">
+          ${[
+            ['Bill amount', money(c.amount)],
+            ['Documents', docs().length],
+            ['Findings', findings().length],
+            ['Current stage', c.stage]
+          ].map(([t, v]) => `
+            <div class="card stat">
+              <div class="stat-head">${t}</div>
+              <div style="font-size:22px;font-weight:700;margin-top:12px">${esc(v)}</div>
+            </div>
+          `).join('')}
+        </div>
+        <section class="card">
+          <div class="card-head">
+            <div>
+              <h2>Case progress</h2>
+              <p>Hover over a stage to see what it involves.</p>
+            </div>
+            ${badge(c.stage)}
+          </div>
+          ${progress(c)}
+          <div class="next-step">
+            ${icon('info')}
+            <span>${esc(nextAction(c)[0])}</span>
+            ${btn(nextAction(c)[1], `go('${nextAction(c)[2]}')`, 'primary')}
+          </div>
+        </section>
+        <div class="space"></div>
+        <div class="two-col">
+          <section class="card padded">
+            <h3>Case information</h3>
+            <p class="note-text">${esc(c.description || 'No description provided.')}</p>
+            <p class="note-text">
+              Hospital city: ${esc(c.city || 'Not provided')}<br>
+              Bill date: ${date(c.date)}<br>
+              Admission: ${date(c.admission)}<br>
+              Discharge: ${date(c.discharge)}<br>
+              Insurance: ${esc(c.insurance)}
+            </p>
+            <h4>Review objectives</h4>
+            ${(c.objectives || []).map(o => `<p class="note-text">${icon('check')} ${esc(o)}</p>`).join('')}
+          </section>
+          <section class="card padded">
+            <h3>Your next actions</h3>
+            <div class="stack">
+              ${[
+                ['upload', 'Upload supporting documents'],
+                ['audit', 'Inspect audit findings'],
+                ['price', 'Check price references'],
+                ['evidence', 'Organize evidence'],
+                ['complaint', 'Prepare a complaint draft'],
+                ['reports', 'Review available exports']
+              ].map(([r, l]) => btn(l, `go('${r}')`, '', 'arrow')).join('')}
+            </div>
+          </section>
+        </div>
+      `;
+    }
+
+    /* ==========================================================================
+       CASE CREATION / WIZARD VIEW
+       ========================================================================== */
+    function field(label, key, type = 'text', required = false) {
+      return `
+        <div>
+          <label for="f-${key}">${label}${required ? ' *' : ''}</label>
+          <input id="f-${key}" name="${key}" type="${type}" ${required ? 'required' : ''} ${type === 'number' ? 'min="0" step="0.01"' : ''} value="${esc(wizard[key] || '')}">
+        </div>
+      `;
+    }
+
+    function newPage() {
+      let edit = !!wizard.id;
+      return `
+        ${heading(edit ? 'Edit your case' : 'Start a new bill review', 'A few details will help keep your documents and review organized.')}
+        <div class="card padded" style="max-width:900px">
+          <div class="wizard-top">
+            ${['Case information', 'Review objectives', 'Review & create'].map((s, i) => `
+              <span class="${wizardStep === i + 1 ? 'active' : wizardStep > i + 1 ? 'complete' : ''}">${i + 1}. ${s}</span>
+            `).join('')}
+          </div>
+          <form id="wizard-form">
+            ${wizardStep === 1 ? `
+              <div class="form-grid">
+                ${field('Case name', 'name', 'text', true)}
+                ${field('Hospital or healthcare provider', 'hospital', 'text', true)}
+                ${field('Hospital city', 'city')}
+                ${field('Total bill amount', 'amount', 'number', true)}
+                ${field('Admission date', 'admission', 'date')}
+                ${field('Discharge date', 'discharge', 'date')}
+                ${field('Bill date', 'date', 'date')}
+                <div>
+                  <label for="insurance">Insurance status</label>
+                  <select name="insurance" id="insurance">
+                    ${['Insured', 'Self-paid', 'Partially insured'].map(v => `<option ${wizard.insurance === v ? 'selected' : ''}>${v}</option>`).join('')}
+                  </select>
+                </div>
+                <div class="wide">
+                  <label for="description">What would you like to understand?</label>
+                  <textarea name="description" id="description" placeholder="Describe the bill or the concern in your own words.">${esc(wizard.description || '')}</textarea>
+                </div>
+              </div>
+            ` : wizardStep === 2 ? `
+              <h3 style="font-size:15px;margin-bottom:6px">What would you like to review?</h3>
+              <p class="note-text" style="margin-bottom:16px">Select one or more objectives. You can update these later.</p>
+              ${objectiveOptions.map(v => `
+                <label class="check">
+                  <input type="checkbox" name="objectives" value="${esc(v)}" ${(wizard.objectives || []).includes(v) ? 'checked' : ''}>
+                  ${esc(v)}
+                </label>
+              `).join('')}
+            ` : `
+              <h3 style="font-size:15px;margin-bottom:6px">Check your case details</h3>
+              <div class="notice">
+                ${demo ? 'This case will be added to the separate demo session. Use fictional details only.' : 'This case stays only in this tab. Refreshing or closing it will clear the workspace.'}
+              </div>
+              <div class="form-grid">
+                ${[
+                  ['Case name', wizard.name],
+                  ['Provider', wizard.hospital],
+                  ['City', wizard.city],
+                  ['Bill amount', money(wizard.amount)],
+                  ['Bill date', date(wizard.date)],
+                  ['Insurance', wizard.insurance]
+                ].map(([k, v]) => `
+                  <div>
+                    <label>${k}</label>
+                    <span style="font-weight:600">${esc(v || 'Not provided')}</span>
+                  </div>
+                `).join('')}
+                <div class="wide">
+                  <label>Review objectives</label>
+                  ${(wizard.objectives || []).map(v => `<p class="note-text">${icon('check')} ${esc(v)}</p>`).join('')}
+                </div>
+              </div>
+            `}
+            <p id="wizard-error" class="error" role="alert"></p>
+            <div class="actions" style="justify-content:space-between;margin-top:24px">
+              ${wizardStep > 1 ? btn('Back', 'wizardStep--;render()') : btn('Cancel', "go('cases')")}
+              <button type="submit" class="primary">
+                ${wizardStep < 3 ? 'Continue' : edit ? 'Save case locally' : 'Create case locally'} ${icon('arrow')}
+              </button>
+            </div>
+          </form>
+          <p class="inline-note">No backend is connected. Progress is retained only while this tab remains open.</p>
+        </div>
+      `;
+    }
+
+    function bindWizard() {
+      document.getElementById('wizard-form').onsubmit = e => {
+        e.preventDefault();
+        let data = new FormData(e.target);
+        if (wizardStep === 1) {
+          Object.assign(wizard, Object.fromEntries(data));
+          wizard.amount = Number(wizard.amount);
+          if (wizard.admission && wizard.discharge && wizard.discharge < wizard.admission) {
+            document.getElementById('wizard-error').textContent = 'Discharge date must not be before admission date.';
+            return;
+          }
+          wizardStep = 2;
+          render();
+        } else if (wizardStep === 2) {
+          wizard.objectives = data.getAll('objectives');
+          if (!wizard.objectives.length) {
+            document.getElementById('wizard-error').textContent = 'Select at least one review objective.';
+            return;
+          }
+          wizardStep = 3;
+          render();
+        } else {
+          let edit = !!wizard.id;
+          let id = wizard.id || 'LOCAL-' + Date.now().toString().slice(-6);
+          let c = {
+            ...wizard,
+            id,
+            updated: new Date().toISOString().slice(0, 10),
+            stage: wizard.stage || 'Awaiting Documents',
+            progress: wizard.progress || 1
+          };
+          if (edit) state().cases = state().cases.map(x => x.id === id ? c : x);
+          else state().cases.unshift(c);
+          activeId = id;
+          addActivity(edit ? 'Case details updated locally' : 'Case created locally');
+          wizard = {};
+          wizardStep = 1;
+          go('detail', id);
+          toast('Case saved in this tab. No server request was made.');
+        }
+      };
+    }
+
+    function needCase() {
+      return empty('Create a case first', 'Documents, findings and drafts need a case to stay organized.', "wizard={};wizardStep=1;go('new')", 'Create a case');
+    }
+
+    /* ==========================================================================
+       DOCUMENT UPLOAD VIEW
+       ========================================================================== */
+    function uploadPage() {
+      if (!current()) return needCase();
+      return `
+        ${heading('Your document center', 'Bring the bill and supporting records together.', selector())}
+        <div class="notice">
+          ${icon('lock')}
+          <span>Select documents only if you are authorized to use them. In this prototype, files remain in memory in this tab and are not uploaded to a server.</span>
+        </div>
+        <div class="two-col">
+          <section class="card padded">
+            <div class="dropzone" id="dropzone">
+              ${icon('upload')}
+              <h3>Drop your documents here</h3>
+              <p>PDF, JPG or PNG · Up to 10 MB per file</p>
+              <input type="file" id="file-input" accept="application/pdf,image/jpeg,image/png" multiple hidden onchange="selectFiles(this.files);this.value=''">
+              ${btn('Browse files', "document.getElementById('file-input').click()", 'primary', 'plus')}
+              <p style="margin-top:12px;margin-bottom:0">Files are selected locally, not sent to a server.</p>
+            </div>
+            <div id="pending-files">${pendingHtml()}</div>
+            <div class="actions" style="margin-top:20px">
+              ${btn('Add selected files locally', 'commitFiles()', 'primary', 'file')}
+              ${btn('Continue to review', "go('review')")}
+            </div>
+          </section>
+          <section class="card padded">
+            <h3 style="margin-top:0;font-size:15px;font-weight:700">Case documents <span class="badge gray">${docs().length}</span></h3>
+            ${docs().length ? docs().map(documentRow).join('') : empty('No documents yet', 'Select a bill and any supporting records to begin.')}
+            <p class="inline-note">Sample documents are generated illustrations, not actual uploaded patient files.</p>
+          </section>
+        </div>
+      `;
+    }
+
+    function pendingHtml() {
+      return pending.map((p, i) => `
+        <div class="document">
+          ${icon(p.error ? 'warning' : 'file')}
+          <div class="details">
+            <strong>${esc(p.file.name)}</strong>
+            <small>${(p.file.size / 1024 / 1024).toFixed(2)} MB · ${p.error ? `<span class="error">${esc(p.error)}</span>` : 'Selected locally'}</small>
+          </div>
+          ${!p.error ? `
+            <select aria-label="Category for ${esc(p.file.name)}" onchange="pending[${i}].category=this.value">
+              ${categories.map(c => `<option ${p.category === c ? 'selected' : ''}>${esc(c)}</option>`).join('')}
+            </select>
+          ` : ''}
+          ${btn('Remove', `pending.splice(${i},1);refreshPending()`, 'small')}
+        </div>
+      `).join('');
+    }
+
+    function refreshPending() {
+      document.getElementById('pending-files').innerHTML = pendingHtml();
+    }
+
+    function selectFiles(files) {
+      for (let f of files) {
+        let error = !['application/pdf', 'image/jpeg', 'image/png'].includes(f.type) ? 'Unsupported file type' :
+                    f.size > 10 * 1024 * 1024 ? 'File exceeds 10 MB' :
+                    f.size === 0 ? 'File is empty' : '';
+        pending.push({ file: f, error, category: categories[0] });
+      }
+      refreshPending();
+    }
+
+    function wireDrop() {
+      let z = document.getElementById('dropzone');
+      z.ondragover = e => { e.preventDefault(); z.classList.add('drag'); };
+      z.ondragleave = () => z.classList.remove('drag');
+      z.ondrop = e => { e.preventDefault(); z.classList.remove('drag'); selectFiles(e.dataTransfer.files); };
+    }
+
+    function commitFiles() {
+      let valid = pending.filter(p => !p.error);
+      if (!valid.length) {
+        toast('Choose at least one valid PDF, JPG or PNG first.');
+        return;
+      }
+      for (let p of valid) {
+        let id = 'DOC-' + Date.now() + '-' + Math.random().toString(16).slice(2, 6);
+        state().docs.push({
+          id,
+          caseId: current().id,
+          name: p.file.name,
+          category: p.category,
+          status: 'Selected locally',
+          size: p.file.size,
+          type: p.file.type,
+          sample: false
+        });
+        docUrls.set(id, URL.createObjectURL(p.file));
+      }
+      pending = pending.filter(p => p.error);
+      addActivity(`${valid.length} document(s) selected locally`);
+      render();
+      toast('Files added to this tab only. Server upload and OCR are unavailable.');
+    }
+
+    function documentRow(d) {
+      return `
+        <div class="document">
+          ${icon('file')}
+          <div class="details">
+            <strong>${esc(d.name)}</strong>
+            <small>${esc(d.category)} · ${d.sample ? 'Demo Data' : (d.size / 1024).toFixed(0) + ' KB'}</small>
+            <div style="margin-top:5px">${badge(d.status)}</div>
+          </div>
+          ${btn('Preview', `previewDoc('${d.id}')`, 'small', 'eye')}
+          ${btn('Review', `reviewDoc('${d.id}')`, 'small')}
+        </div>
+      `;
+    }
+
+    let selectedDoc;
+    function reviewDoc(id) {
+      selectedDoc = id;
+      go('review');
+    }
+
+    function samplePaper(d) {
+      let bill = d.category.includes('invoices');
+      return `
+        <div class="paper">
+          <div class="eyebrow">SYNTHETIC DOCUMENT · DEMO DATA</div>
+          <h3>${esc(current()?.hospital || 'Sample provider')}</h3>
+          <p style="font-size:11px;color:var(--text-muted);margin:8px 0 14px">
+            ${bill ? 'ITEMIZED HOSPITAL BILL' : 'SUPPORTING DOCUMENT'}<br>
+            Sample patient · ${esc(current()?.id)}<br>
+            Invoice: SAMPLE-2026-01<br>
+            Bill date: ${date(current()?.date)}
+          </p>
+          <hr style="border:0;border-top:1px solid #dce2ea;margin-bottom:14px">
+          ${bill && current()?.id !== 'BS-1024' ? `
+            <p class="note-text">Sample discharge invoice total: ${money(current()?.amount)}. Detailed line items are not supplied in this illustration.</p>
+          ` : bill ? `
+            <table>
+              <tbody>
+                ${[
+                  ['Room & nursing', 30000],
+                  ['Procedure & services', 42000],
+                  ['CBC panel', 2500],
+                  ['CBC panel', 2500],
+                  ['Medicines & supplies', 7000]
+                ].map(([l, a]) => `<tr><td>${l}</td><td style="font-weight:600">${money(a)}</td></tr>`).join('')}
+                <tr style="border-top:2px solid #e2e8f0">
+                  <td><strong>Line-item total</strong></td>
+                  <td><strong>₹84,000</strong></td>
+                </tr>
+                <tr>
+                  <td><strong>Billed total</strong></td>
+                  <td><strong>₹84,500</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          ` : '<p class="note-text">This fictional supporting document is a preview placeholder. No clinical narrative or patient identity is provided.</p>'}
+          <p style="font-size:9.5px;color:#94a3b8;margin-top:30px">
+            Page 1 · Generated illustration, not an actual patient record.<br>Amounts are synthetic and do not represent official rates.
+          </p>
+        </div>
+      `;
+    }
+
+    function previewDoc(id) {
+      let d = state().docs.find(d => d.id === id);
+      if (!d) return;
+      modal(d.name, `<div class="doc-preview" style="min-height:300px">${documentPreview(d)}</div>`);
+    }
+
+    function documentPreview(d) {
+      if (d.sample) return samplePaper(d);
+      let u = docUrls.get(d.id);
+      if (!u) return '<p>Preview unavailable in this session. Select the file again.</p>';
+      return d.type === 'application/pdf' ?
+        `<iframe title="Document preview" src="${u}" style="border:0;width:100%;height:520px"></iframe>` :
+        `<img src="${u}" alt="Selected document preview" style="max-width:100%;height:auto">`;
+    }
+
+    /* ==========================================================================
+       DOCUMENT REVIEW VIEW
+       ========================================================================== */
+    function reviewPage() {
+      if (!current()) return needCase();
+      let ds = docs(), d = ds.find(x => x.id === selectedDoc) || ds[0];
+      if (!d) return heading('Document review', 'Confirm source details before using them in an audit.', selector()) + empty('No documents to review', 'Add a bill to this case first.', "go('upload')", 'Add documents');
+      selectedDoc = d.id;
+      let values = ocrEdits[d.id] || { hospital: current().hospital, invoice: 'SAMPLE-2026-01', date: current().date, total: current().amount, patient: 'Sample patient' };
+      return `
+        ${heading('Review the source, then the details', 'Keep AI-extracted values separate from user-confirmed information.', selector())}
+        <div class="notice ${d.sample ? '' : 'warning'}">
+          ${icon(d.sample ? 'info' : 'warning')}
+          <span>${d.sample ? 'Illustrative extracted fields · No OCR engine was run. Confidence scores are unavailable.' : 'OCR unavailable — no extraction service is connected. Enter values manually and check the source. No confidence score is available.'}</span>
+        </div>
+        <div class="row" style="margin-bottom:18px">
+          <label class="sr-only" for="doc-select">Select document</label>
+          <select id="doc-select" class="page-selector" onchange="selectedDoc=this.value;render()">
+            ${ds.map(x => `<option value="${x.id}" ${d.id === x.id ? 'selected' : ''}>${esc(x.name)}</option>`).join('')}
+          </select>
+          ${badge(d.status)}
+        </div>
+        <div class="two-col">
+          <section class="card padded">
+            <div class="row" style="justify-content:space-between;margin-bottom:14px">
+              <strong>Source document</strong>
+              <span class="source-pill">${d.sample ? 'Page 1' : 'Original file'}</span>
+            </div>
+            <div class="doc-preview">${documentPreview(d)}</div>
+          </section>
+          <section class="card padded">
+            <h3 style="margin:0 0 4px;font-size:15px;font-weight:700">${d.sample ? 'Illustrative extracted information' : 'Manual information entry'}</h3>
+            <p class="note-text" style="margin-bottom:16px">${d.confirmed ? 'User-confirmed values.' : 'Unconfirmed — inspect the original document before confirming.'}</p>
+            <form id="ocr-form" onsubmit="event.preventDefault();saveOCR(false)">
+              ${[
+                ['Patient name', 'patient', 'text'],
+                ['Hospital name', 'hospital', 'text'],
+                ['Invoice number', 'invoice', 'text'],
+                ['Bill date', 'date', 'date'],
+                ['Final total (INR)', 'total', 'number']
+              ].map(([l, k, t]) => `
+                <div class="extracted-field">
+                  <label for="ocr-${k}">${l}</label>
+                  <input id="ocr-${k}" name="${k}" type="${t}" ${t === 'number' ? 'min="0" step="0.01"' : ''} value="${esc((d.sample || ocrEdits[d.id]) ? values[k] : '')}">
+                  <small>${d.sample ? 'Sample source: page 1' : 'Source page not supplied · manually entered'} · ${d.confirmed ? 'User confirmed' : 'Not confirmed'}</small>
+                </div>
+              `).join('')}
+              <div class="actions" style="margin-top:20px">
+                <button class="primary" type="submit">Save Changes</button>
+                ${btn('Mark as Reviewed', 'saveOCR(true)')}
+                ${btn('Reprocess Document', "unavailable('OCR reprocessing','POST /api/documents/:id/reprocess')")}
+                ${btn('Continue to Bill Audit', "go('audit')", '', 'arrow')}
+              </div>
+            </form>
+            <p class="inline-note">Edits are stored in memory only. No invented confidence percentages are shown. A local review does not run an audit.</p>
+          </section>
+        </div>
+      `;
+    }
+
+    function saveOCR(confirm) {
+      let form = document.getElementById('ocr-form');
+      if (!form.reportValidity()) return;
+      let data = Object.fromEntries(new FormData(form));
+      if (confirm && Object.values(data).some(v => !v.trim())) {
+        toast('Complete each field, or save changes without marking it reviewed.');
+        return;
+      }
+      ocrEdits[selectedDoc] = data;
+      let d = state().docs.find(d => d.id === selectedDoc);
+      if (confirm) {
+        d.status = 'Reviewed locally';
+        d.confirmed = true;
+        addActivity('Document details reviewed locally');
+      }
+      render();
+      toast(confirm ? 'Document marked reviewed in this tab.' : 'Changes saved in this tab.');
+    }
+
+    function unavailable(feature, endpoint) {
+      modal(feature + ' is not connected', `
+        <p>This frontend has no connected backend for ${esc(feature.toLowerCase())}. Nothing has been submitted or processed.</p>
+        <div class="notice">
+          <strong>Proposed integration point</strong><br>
+          <code>${esc(endpoint)}</code>
+        </div>
+        <p class="note-text">These are proposed API contracts, not existing endpoints. See the included integration guide.</p>
+      `);
+    }
+
+    /* ==========================================================================
+       BILL AUDIT VIEW
+       ========================================================================== */
+    function auditPage() {
+      if (!current()) return needCase();
+      let fs = findings(), amount = current().amount;
+      let filtered = fs.filter(f => auditFilter === 'all' || f.type === auditFilter || (auditFilter === 'unresolved' && f.status !== 'Resolved by User'));
+      return `
+        ${heading('Bill audit', 'Understand the questions. Inspect the evidence. Decide the next step.', selector())}
+        <div class="notice ${fs.length ? '' : 'warning'}">
+          ${icon(fs.length ? 'info' : 'warning')}
+          <span>${fs.length ? 'Illustrative sample findings — not produced by a live audit service. A flag is not proof of an invalid charge, fraud or overcharging.' : 'No audit has been run. The backend audit service is not connected. Local document review does not produce automated findings.'}</span>
+        </div>
+        <div class="audit-mini">
+          ${[
+            ['Total bill amount', money(amount)],
+            ['Total of itemized entries', current().id === 'BS-1024' ? '₹84,000' : 'Not available'],
+            ['Arithmetic differences', fs.filter(f => f.type === 'arithmetic').length],
+            ['Potential duplicate entries', fs.filter(f => f.type === 'duplicate').length],
+            ['Medical-record review', fs.filter(f => f.type === 'medical').length],
+            ['Price-reference review', 'Not performed']
+          ].map(([l, v]) => `
+            <div class="card">
+              <small>${l}</small>
+              <strong>${v}</strong>
+              ${demo ? '<span class="badge gray">Sample data</span>' : ''}
+            </div>
+          `).join('')}
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h2>Findings requiring a closer look</h2>
+              <p>Review dates, quantities, descriptions and source pages.</p>
+            </div>
+            ${btn('Run bill audit', "unavailable('Bill audit','POST /api/cases/:id/audits')", 'primary', 'audit')}
+          </div>
+          <div class="table-tools">
+            <select aria-label="Filter audit findings" onchange="auditFilter=this.value;render()">
+              ${[
+                ['all', 'All findings'],
+                ['unresolved', 'Unresolved'],
+                ['arithmetic', 'Arithmetic verification'],
+                ['duplicate', 'Potential duplicates'],
+                ['medical', 'Medical-record cross-check'],
+                ['package', 'Package / insurance review']
+              ].map(([v, l]) => `<option value="${v}" ${auditFilter === v ? 'selected' : ''}>${l}</option>`).join('')}
+            </select>
+          </div>
+          ${filtered.length ? `
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>FINDING</th>
+                    <th>AMOUNT INVOLVED</th>
+                    <th>WHY IT WAS FLAGGED</th>
+                    <th>SOURCE</th>
+                    <th>STATUS</th>
+                    <th>ACTION</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${filtered.map(f => `
+                    <tr>
+                      <td>
+                        <strong>${esc(f.name)}</strong>
+                        <small>${f.id} · Demo Data</small>
+                      </td>
+                      <td class="money">${f.amount === null ? 'Not determined' : money(f.amount)}</td>
+                      <td class="item-note">${esc(f.why)}</td>
+                      <td>${f.doc}<small>Page ${f.page}</small></td>
+                      <td>${badge(f.status)}</td>
+                      <td>
+                        <div class="stack" style="gap:6px">
+                          ${btn('View Evidence', `findingEvidence('${f.id}')`, 'text-link')}
+                          ${btn('Mark as Reviewed', `resolveFinding('${f.id}')`, 'text-link')}
+                        </div>
+                      </td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          ` : empty('No findings to display', 'Run a connected audit service when available, or change the filter.')}
+          <div class="padded" style="border-top:1px solid #f1f5f9">
+            <p class="note-text">Missing documentation does not prove that a service was not provided. Similar entries may represent separate services. Check uploaded package and insurance terms before drawing conclusions.</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function findingEvidence(id) {
+      let f = state().findings.find(x => x.id === id);
+      modal('Finding ' + id, `
+        <p><strong>${esc(f.name)}</strong></p>
+        <p style="margin:8px 0">${esc(f.why)}</p>
+        <p>Source: ${esc(f.doc)} · page ${f.page} · <strong>Demo Data</strong></p>
+        <p class="note-text">This is an illustrative observation, not a verified allegation.</p>
+      `, btn('Open source', `document.getElementById('dialog').close();previewDoc('${f.doc}')`, 'primary'));
+    }
+
+    function resolveFinding(id) {
+      modal('Record your review', `
+        <p>Mark this observation as reviewed by you. This records your action; it does not establish that the charge is valid or invalid.</p>
+        <label for="resolution-note" style="margin-top:14px">Review note (required)</label>
+        <textarea id="resolution-note" placeholder="What did you check, and what remains uncertain?"></textarea>
+      `, btn('Save review', `finishFinding('${id}')`, 'primary'));
+    }
+
+    function finishFinding(id) {
+      let note = document.getElementById('resolution-note').value.trim();
+      if (!note) {
+        toast('Add a review note first.');
+        return;
+      }
+      let f = state().findings.find(x => x.id === id);
+      f.status = 'Resolved by User';
+      f.note = note;
+      addActivity('Finding review recorded locally');
+      document.getElementById('dialog').close();
+      render();
+      toast('User review recorded locally; no automated verification was performed.');
+    }
+
+    /* ==========================================================================
+       PRICE VERIFICATION VIEW
+       ========================================================================== */
+    function pricePage() {
+      if (!current()) return needCase();
+      return `
+        ${heading('Price verification', 'Compare only against documented, applicable references.', selector())}
+        <div class="notice warning">
+          ${icon('warning')}
+          <span>A price difference does not automatically establish overcharging. Applicability can depend on the location, date, procedure, room category, insurance contract and other conditions.</span>
+        </div>
+        <section class="card">
+          <div class="card-head">
+            <div>
+              <h2>Reference comparisons</h2>
+              <p>No official rates or source links have been fabricated.</p>
+            </div>
+            ${btn('Connect reference lookup', "unavailable('Reference lookup','GET /api/cases/:id/price-references')")}
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  ${['BILLED ITEM', 'BILLED AMOUNT', 'REFERENCE / DIFFERENCE', 'SOURCE / EFFECTIVE DATE', 'APPLICABILITY', 'STATUS'].map(t => `<th>${t}</th>`).join('')}
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Case bill total</td>
+                  <td class="money">${money(current().amount)}</td>
+                  <td>Not available</td>
+                  <td>No verified source</td>
+                  <td>Not established</td>
+                  <td>${badge('Reference Check Needed')}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          ${empty('No applicable verified reference found.', 'Upload package documents, policy terms or a documented contractual price schedule. A suitable reference must be checked for applicability.', "go('upload')", 'Add reference documents')}
+        </section>
+        <div class="space"></div>
+        <div class="card padded">
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:12px">What makes a useful reference?</h3>
+          <div class="two-col">
+            <p class="note-text">An applicable government notification or official rate with a verifiable source and effective date.<br><br>Uploaded hospital package terms or contractual price schedules.</p>
+            <p class="note-text">Insurance policy and settlement conditions matching your specific case.<br><br>Do not substitute a generic internet price for a verified applicable reference.</p>
+          </div>
+        </div>
+      `;
+    }
+
+    /* ==========================================================================
+       EVIDENCE CENTER VIEW
+       ========================================================================== */
+    function evidencePage() {
+      if (!current()) return needCase();
+      return `
+        ${heading('Evidence center', 'Keep every claim connected to its source.', selector())}
+        <div class="two-col">
+          <section class="card padded">
+            <h3 style="font-size:14px;margin-top:0;font-weight:700">Evidence summary</h3>
+            <p class="note-text"><strong>Verified document facts:</strong> ${docs().filter(d => d.confirmed).length} document(s) reviewed by you locally. Independent verification is unavailable.</p>
+            <p class="note-text"><strong>User-provided statement:</strong> ${esc(current().description || 'None recorded.')}</p>
+            <p class="note-text"><strong>AI-generated observations:</strong> ${demo ? 'Sample findings only; no live AI generation.' : 'No AI service connected.'}</p>
+            <p class="note-text"><strong>Unresolved questions:</strong> ${findings().filter(f => f.status !== 'Resolved by User').length} finding(s) requiring review.</p>
+            <p class="note-text"><strong>Missing supporting documents:</strong> ${docs().some(d => d.category === 'Hospital package or estimate documents') ? 'Package document selected; applicability not verified.' : 'No package / estimate document has been added.'}</p>
+          </section>
+          <section class="card padded">
+            <h3 style="font-size:14px;margin-top:0;font-weight:700">Your evidence notes</h3>
+            <label for="evidence-notes">Questions, context and document references</label>
+            <textarea id="evidence-notes" placeholder="Record what you know and what needs clarification…">${esc(state().notes[current().id] || '')}</textarea>
+            <div class="actions" style="margin-top:12px">
+              ${btn('Save notes', "state().notes[current().id]=document.getElementById('evidence-notes').value;toast('Notes saved in this tab.')", 'primary')}
+              ${btn('Add documents', "go('upload')")}
+            </div>
+          </section>
+        </div>
+        <div class="space"></div>
+        <section class="card">
+          <div class="card-head">
+            <div>
+              <h2>Document library & finding links</h2>
+              <p>Original source pages and user-added associations.</p>
+            </div>
+          </div>
+          <div class="table-tools">
+            <input id="evidence-search" aria-label="Search evidence" placeholder="Search documents…" oninput="updateEvidence()">
+            <select id="evidence-category" aria-label="Filter document category" onchange="updateEvidence()">
+              <option value="all">All categories</option>
+              ${categories.map(c => `<option>${esc(c)}</option>`).join('')}
+            </select>
+          </div>
+          <div id="evidence-table"></div>
+        </section>
+        <div class="space"></div>
+        <section class="card padded">
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:12px">Evidence timeline</h3>
+          ${docs().map(d => `<p class="note-text"><span class="source-pill">${d.sample ? 'Sample timeline' : date(new Date().toISOString().slice(0, 10))}</span> ${esc(d.name)} — ${esc(d.status)}</p>`).join('') || '<p class="note-text">Your documents will appear here.</p>'}
+        </section>
+      `;
+    }
+
+    function updateEvidence() {
+      let q = document.getElementById('evidence-search').value.toLowerCase();
+      let cat = document.getElementById('evidence-category').value;
+      let ds = docs().filter(d => d.name.toLowerCase().includes(q) && (cat === 'all' || d.category === cat));
+      document.getElementById('evidence-table').innerHTML = ds.length ? `
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>EVIDENCE ID / DOCUMENT</th>
+                <th>RELATED FINDING</th>
+                <th>SOURCE PAGE</th>
+                <th>DATE</th>
+                <th>REVIEW STATUS</th>
+                <th>ACTIONS</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${ds.map(d => `
+                <tr>
+                  <td>
+                    <strong>${esc(d.name)}</strong>
+                    <small>${esc(d.id)} ${d.sample ? '· Demo Data' : ''}</small>
+                  </td>
+                  <td>${findings().filter(f => f.doc === d.id || f.extraDoc === d.id).map(f => f.id).join(', ') || 'Not linked'}</td>
+                  <td>${d.sample ? '1' : 'Not supplied'}</td>
+                  <td>${d.sample ? 'Sample · ' + date(current().date) : 'This session'}</td>
+                  <td>${badge(d.status)}</td>
+                  <td>
+                    <div class="row">
+                      ${btn('Preview', `previewDoc('${d.id}')`, 'text-link')}
+                      ${btn('Link finding', `linkFinding('${d.id}')`, 'text-link')}
+                      ${btn('Download', `downloadDoc('${d.id}')`, 'text-link')}
+                    </div>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      ` : empty('No matching evidence', 'Add documents or change your filters.');
+    }
+
+    function linkFinding(id) {
+      if (!findings().length) {
+        toast('No findings exist for this case yet.');
+        return;
+      }
+      modal('Link a document to a finding', `
+        <label for="link-finding">Select finding</label>
+        <select id="link-finding">
+          ${findings().map(f => `<option value="${f.id}">${esc(f.id + ' · ' + f.name)}</option>`).join('')}
+        </select>
+        <p class="note-text" style="margin-top:10px">This records your association, not independent verification.</p>
+      `, btn('Save link', `state().findings.find(f=>f.id===document.getElementById('link-finding').value).extraDoc='${id}';document.getElementById('dialog').close();render();toast('Evidence link saved locally.')`, 'primary'));
+    }
+
+    function downloadDoc(id) {
+      let d = state().docs.find(d => d.id === id);
+      if (d.sample) {
+        download('sample-document-' + id + '.txt', `SYNTHETIC DOCUMENT — DEMO DATA\n${d.name}\n${current().hospital}\nCase: ${current().id}\nThis is a fictional demonstration document, not a patient record.\n${d.category.includes('invoices') ? 'Room & nursing 30000\nProcedure & services 42000\nCBC panel 2500\nCBC panel 2500\nMedicines & supplies 7000\nLine-item total 84000\nBilled total 84500\nSource page: 1' : ''}`);
+        return;
+      }
+      let u = docUrls.get(id);
+      if (u) {
+        let a = document.createElement('a');
+        a.href = u;
+        a.download = d.name;
+        a.click();
+      } else {
+        toast('Original file is unavailable. Select it again.');
+      }
+    }
+
+    /* ==========================================================================
+       DRAFT ASSISTANT VIEW (COMPLAINT & AFFIDAVIT)
+       ========================================================================== */
+    function draftKey(type) {
+      return `${demo ? 'demo' : 'local'}:${current()?.id}:${type}`;
+    }
+
+    function draftPage(type) {
+      if (!current()) return needCase();
+      let aff = type === 'affidavit';
+      let title = aff ? 'Affidavit draft assistant' : 'Complaint assistant';
+      let key = draftKey(type);
+      let model = drafts[key] || { step: 1, selected: [], text: '' };
+      drafts[key] = model;
+
+      return `
+        ${heading(title, 'Build a factual draft. Keep control of every word.', selector())}
+        <div class="notice warning">
+          ${icon('warning')}
+          <span>${aff ? 'This is an AI-assisted draft, not a sworn or legally validated affidavit. Review it carefully and obtain appropriate legal guidance about execution, attestation, or notarization requirements.' : 'Draft for Review — no complaint is automatically submitted. No legal provisions, authorities or case numbers are inferred.'}</span>
+        </div>
+        <div class="card padded">
+          <div class="wizard-top">
+            ${['Select concerns', 'Factual summary', 'Edit draft', 'Review & export'].map((s, i) => `
+              <span class="${model.step === i + 1 ? 'active' : model.step > i + 1 ? 'complete' : ''}">${i + 1}. ${s}</span>
+            `).join('')}
+          </div>
+          ${model.step === 1 ? `
+            <h3 style="font-size:15px;margin-bottom:6px">Choose what to include</h3>
+            <p class="note-text" style="margin-bottom:14px">Sample findings are illustrative, not verified allegations. Documents for this case are included in the draft checklist.</p>
+            ${findings().length ? findings().map(f => `
+              <label class="check">
+                <input type="checkbox" onchange="toggleDraftFinding('${type}','${f.id}',this.checked)" ${model.selected.includes(f.id) ? 'checked' : ''}>
+                ${esc(f.name)} <span class="source-pill">${f.id} · ${f.doc}, p.${f.page}</span>
+              </label>
+            `).join('') : '<p class="note-text">No audit findings. A blank factual template can still be prepared.</p>'}
+            <label for="draft-account" style="margin-top:20px">Your factual account (optional)</label>
+            <textarea id="draft-account" placeholder="Only describe facts you can support. Avoid patient identifiers in this prototype." oninput="drafts[draftKey('${type}')].account=this.value">${esc(model.account || '')}</textarea>
+          ` : model.step === 2 ? `
+            <h3 style="font-size:15px;margin-bottom:6px">Check the factual summary</h3>
+            <p class="note-text"><strong>Case:</strong> ${esc(current().name)} · ${esc(current().id)}</p>
+            <p class="note-text"><strong>Provider:</strong> ${esc(current().hospital)}</p>
+            <p class="note-text"><strong>Bill date:</strong> ${date(current().date)} · <strong>Amount:</strong> ${money(current().amount)}</p>
+            <p class="note-text"><strong>User-provided account:</strong> ${esc(model.account || 'Not supplied. Placeholder will be included.')}</p>
+            ${model.selected.map(id => {
+              let f = findings().find(f => f.id === id);
+              return f ? `<p class="note-text">${esc(f.name)} — ${esc(f.doc)}, page ${f.page} <span class="badge amber">Sample observation</span></p>` : '';
+            }).join('')}
+            <div class="notice" style="margin-top:16px">
+              ${icon('info')}
+              <span>Draft generation here uses a local template, not an AI model. Every unresolved concern is phrased as a request for clarification.</span>
+            </div>
+          ` : model.step === 3 ? `
+            <div class="row" style="justify-content:space-between;margin-bottom:12px">
+              <h3 style="font-size:15px">Draft for Review</h3>
+              <span class="badge gray">Local template · ${demo ? 'Demo Data' : 'Not legal advice'}</span>
+            </div>
+            <label class="sr-only" for="draft-editor">Editable draft</label>
+            <textarea class="draft" id="draft-editor" oninput="drafts[draftKey('${type}')].text=this.value">${esc(model.text)}</textarea>
+            <p class="inline-note">Edits are kept in this tab. No external AI service has been used.</p>
+          ` : `
+            <h3 style="font-size:15px;margin-bottom:12px">Final review checklist</h3>
+            ${[
+              'I checked every factual statement against the original documents.',
+              'I understand unresolved flags are not proven errors.',
+              'I will verify the recipient, procedure and any execution requirements independently.',
+              'I understand this is an unsigned draft and is not automatically submitted.'
+            ].map(t => `<label class="check"><input type="checkbox" class="final-check">${t}</label>`).join('')}
+            <pre style="white-space:pre-wrap;font:12px/1.8 Georgia,serif;background:#f8fafc;padding:20px;border:1px solid var(--line);border-radius:var(--radius-md);max-height:360px;overflow:auto;margin:16px 0">${esc(model.text)}</pre>
+            <div class="actions">
+              ${btn('Export draft (.txt)', `exportDraft('${type}')`, 'primary', 'download')}
+              ${btn('Print / Save as PDF', `printDraft('${type}')`, '', 'file')}
+            </div>
+            <p class="inline-note">Print opens the browser print dialog; PDF availability depends on your browser.</p>
+          `}
+          <div class="actions" style="justify-content:space-between;margin-top:24px">
+            ${model.step > 1 ? btn('Back', `drafts[draftKey('${type}')].step--;render()`) : '<span></span>'}
+            ${model.step < 4 ? btn(model.step === 2 ? 'Prepare local template' : 'Continue', `advanceDraft('${type}')`, 'primary', 'arrow') : btn('Reports & Exports', "go('reports')")}
+          </div>
+        </div>
+      `;
+    }
+
+    function toggleDraftFinding(type, id, on) {
+      let m = drafts[draftKey(type)];
+      m.selected = on ? [...new Set([...m.selected, id])] : m.selected.filter(x => x !== id);
+    }
+
+    function advanceDraft(type) {
+      let m = drafts[draftKey(type)];
+      if (m.step === 2 && !m.text) m.text = makeDraft(type, m);
+      m.step++;
+      render();
+    }
+
+    function makeDraft(type, m) {
+      let c = current(), fs = findings().filter(f => m.selected.includes(f.id));
+      return `${demo ? 'DEMO DATA — NOT A REAL PATIENT RECORD\n' : ''}DRAFT FOR REVIEW — ${type === 'affidavit' ? 'FACTUAL AFFIDAVIT TEMPLATE' : 'BILLING CLARIFICATION / COMPLAINT TEMPLATE'}
+Local template; no AI model or legal validation was used.
+
+Case reference: ${c.id}
+Prepared: ${new Date().toLocaleDateString('en-GB')}
+
+To: [Recipient / appropriate authority — verify before use]
+From: [Complainant name, address and contact details]
+Provider: ${c.hospital}
+
+1. The case information supplied records a bill dated ${date(c.date)} with a total of ${money(c.amount)}. These details require confirmation against the original.
+
+2. User-provided chronology / factual account:
+${m.account || '[Insert a dated factual account, with a source reference for each statement.]'}
+
+3. Questions for clarification:
+${fs.length ? fs.map((f, i) => `3.${i + 1} Please clarify: ${f.name}. ${f.why} Source: ${f.doc}, page ${f.page}. ${demo ? 'This is a fictional sample observation.' : ''}`).join('\n\n') : '[Insert specific concerns and the supporting document/page references.]'}
+
+4. Supporting document checklist:
+${docs().map(d => `- ${d.id}: ${d.name} (${d.confirmed ? 'reviewed locally' : 'not confirmed'}${d.sample ? '; synthetic sample' : ''}).`).join('\n') || '[No supporting documents added.]'}
+
+5. Requested resolution:
+[Specify the clarification, itemized explanation, correction or other resolution requested without assuming wrongdoing.]
+
+6. Unresolved questions:
+[Confirm the facts, applicability of any pricing references and missing records.]
+
+${type === 'affidavit' ? `7. Verification placeholder:
+[Verify the appropriate wording and execution requirements with qualified legal guidance.]
+
+This is an AI-assisted draft, not a sworn or legally validated affidavit. Review it carefully and obtain appropriate legal guidance about execution, attestation, or notarization requirements.\n\n` : ''}Place: [Place]
+Date: [Date]
+Signature: [To be signed only after review]
+
+This is an unsigned draft, not a filed complaint, sworn statement, legal opinion or verified finding of overcharging. No automatic submission has occurred.`;
+    }
+
+    function checkedFinal() {
+      if ([...document.querySelectorAll('.final-check')].some(c => !c.checked)) {
+        toast('Complete each final review item before exporting.');
+        return false;
+      }
+      return true;
+    }
+
+    function exportDraft(type) {
+      if (!checkedFinal()) return;
+      download(`${current().id}-${type}-draft.txt`, drafts[draftKey(type)].text);
+      toast('Draft exported as plain text. Nothing has been submitted.');
+    }
+
+    function printDraft(type) {
+      if (!checkedFinal()) return;
+      printText(drafts[draftKey(type)].text);
+    }
+
+    function printText(text) {
+      let f = document.createElement('iframe');
+      f.style = 'position:fixed;left:-10000px;width:800px;height:600px';
+      document.body.appendChild(f);
+      f.contentDocument.open();
+      f.contentDocument.write('<!doctype html><html><head><title>Bill Saathi · Draft for Review</title><style>body{font:13px/1.8 Georgia,serif;padding:35px;color:#0f172a}pre{white-space:pre-wrap;font:inherit}</style></head><body><pre>' + esc(text) + '</pre></body></html>');
+      f.contentDocument.close();
+      f.contentWindow.focus();
+      f.contentWindow.print();
+      setTimeout(() => f.remove(), 60000);
+    }
+
+    function download(name, text, type = 'text/plain') {
+      let blob = new Blob([text], { type });
+      let u = URL.createObjectURL(blob);
+      let a = document.createElement('a');
+      a.href = u;
+      a.download = name;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(u), 1000);
+    }
+
+    /* ==========================================================================
+       REPORTS & EXPORTS VIEW
+       ========================================================================== */
+    function reportsPage() {
+      if (!current()) return needCase();
+      let types = [
+        ['Bill Audit Summary', 'audit', 'Case totals, sample findings and unresolved questions.'],
+        ['Potential Discrepancy Report', 'discrepancy', 'Observations that require a closer look, not confirmed errors.'],
+        ['Document Checklist', 'checklist', 'Documents supplied and additional records to request.'],
+        ['Evidence Summary', 'evidence', 'Document references, review status and user notes.'],
+        ['Complaint Draft', 'complaint', 'Editable draft prepared by you in the complaint assistant.'],
+        ['Affidavit Draft', 'affidavit', 'Unsigned factual draft requiring appropriate legal review.']
+      ];
+      return `
+        ${heading('Reports & exports', 'Take a clear, source-aware record into your next conversation.', selector())}
+        <div class="notice">
+          ${icon('info')}
+          <span>Plain-text report export is implemented locally. The browser print dialog can save a PDF where supported. No server-side PDF, filing or legal validation is connected.</span>
+        </div>
+        <div class="report-grid">
+          ${types.map(([t, key, d]) => `
+            <section class="card padded">
+              <span class="icon-box">${icon(key === 'complaint' ? 'complaint' : key === 'affidavit' ? 'affidavit' : 'reports')}</span>
+              <h3>${t}</h3>
+              <p class="muted">${d}</p>
+              ${badge(key === 'complaint' || key === 'affidavit' ? (drafts[draftKey(key)]?.text ? 'Draft for Review' : 'Not prepared') : demo ? 'Sample data' : 'Local data')}
+              <div class="actions" style="margin-top:20px">
+                ${btn('Review report', `reviewReport('${key}')`, '', 'eye')}
+              </div>
+            </section>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function reportText(key) {
+      let c = current();
+      return `${demo ? 'DEMO DATA — NOT A REAL PATIENT RECORD\n' : ''}BILL SAATHI AI — ${key.toUpperCase()} REPORT
+Case: ${c.id} / ${c.name}
+Date: ${new Date().toLocaleDateString('en-GB')}
+Provider: ${c.hospital}
+Review status: ${c.stage}
+Billed amount (user supplied / sample): ${money(c.amount)}
+
+DOCUMENTS & REVIEW STATUS
+${docs().map(d => `${d.id}: ${d.name}; ${d.status}; source page ${d.sample ? '1' : 'not supplied'}`).join('\n') || 'No documents supplied.'}
+
+${key !== 'checklist' ? 'FINDINGS / SOURCE REFERENCES\n' + (findings().map(f => `${f.id}: ${f.name}\n${f.why}\nSource ${f.doc}, page ${f.page}; ${f.status}${f.note ? '\nUser review note: ' + f.note : ''}`).join('\n\n') || 'No audit findings; no connected audit service.') + '\n\n' : ''}USER NOTES
+${state().notes[c.id] || 'None recorded.'}
+
+UNRESOLVED QUESTIONS
+${findings().filter(f => f.status !== 'Resolved by User').map(f => f.id + ': ' + f.name).join('\n') || 'No recorded unresolved findings. This does not establish the absence of billing issues.'}
+
+DOCUMENT CHECKLIST
+${categories.map(cat => `${docs().some(d => d.category === cat) ? '[Selected]' : '[Not supplied]'} ${cat}`).join('\n')}
+
+DISCLAIMER
+Sample findings are illustrative, not actual AI audit outputs. No independent source verification or official pricing check has been completed. User review is not proof of validity. No confirmed fraud, recovery or overcharging is asserted. This is not medical or legal advice.`;
+    }
+
+    function reviewReport(key) {
+      if (['complaint', 'affidavit'].includes(key)) {
+        go(key);
+        let m = drafts[draftKey(key)];
+        m.step = m.text ? 4 : 1;
+        render();
+        return;
+      }
+      let text = reportText(key);
+      window.lastReport = { key, text };
+      modal('Review report before export', `
+        <p class="note-text">Check every source reference and unresolved question. ${demo ? 'This report contains fictional sample records.' : ''}</p>
+        <pre style="white-space:pre-wrap;max-height:390px;overflow:auto;font:11px/1.8 ui-monospace,monospace;background:#f8fafc;padding:14px;border:1px solid var(--line);border-radius:var(--radius-md);margin-top:12px">${esc(text)}</pre>
+      `, btn('Print / Save PDF', 'printText(window.lastReport.text)') + btn('Export .txt', "download(current().id+'-'+window.lastReport.key+'.txt',window.lastReport.text)", 'primary', 'download'));
+    }
+
+    /* ==========================================================================
+       HELP & GUIDANCE VIEW
+       ========================================================================== */
+    function helpPage() {
+      return `
+        ${heading('A little guidance, every step of the way', 'Medical billing can feel complex. Start with one document and one question.')}
+        <div class="card padded" style="margin-bottom:20px">
+          <div class="eyebrow">HOW BILL SAATHI AI WORKS</div>
+          <h3 style="font-size:18px;margin-top:6px;font-weight:750">From a confusing bill to an informed next step.</h3>
+          <div class="help-steps" style="margin-top:16px">
+            ${['Create a case', 'Add your documents', 'Review extracted details', 'Inspect the bill audit', 'Verify relevant references', 'Organize your evidence', 'Prepare an optional draft', 'Review and export'].map(t => `<div>${t}</div>`).join('')}
+          </div>
+        </div>
+        <div class="two-col">
+          <section class="card padded">
+            <h3 style="font-size:15px;margin-top:0;font-weight:700">Billing terms, in plain language</h3>
+            ${[
+              ['Itemized bill', 'A bill that lists individual services, medicines and charges.'],
+              ['Potential duplicate', 'Two entries that may refer to the same charge and need review. Similar descriptions do not establish that a charge is invalid.'],
+              ['Reference price', 'A documented price that may apply to a particular service or situation. Check the effective date and applicability.'],
+              ['Evidence', 'Documents or information supporting a statement.'],
+              ['Complaint draft', 'A document prepared for your review before submission. A draft is not a filed complaint.']
+            ].map(([t, d]) => `<details><summary>${t}</summary><p>${d}</p></details>`).join('')}
+          </section>
+          <section class="card padded">
+            <h3 style="font-size:15px;margin-top:0;font-weight:700">What is available in this prototype?</h3>
+            <p class="note-text">You can create cases locally, select and preview files, edit information, explore sample findings, link evidence, prepare templates, and export text reports.</p>
+            <p class="note-text">Cloud storage, authentication, OCR, automated AI audits, verified price lookup, notifications by email and online complaint submission are not connected.</p>
+            <div class="notice warning">
+              ${icon('warning')}
+              <span>Do not use this prototype as a secure medical-record system. Files and case information are cleared on reload. Use fictional data when demonstrating it.</span>
+            </div>
+            ${btn('View integration requirements', "integrationInfo()", '', 'file')}
+          </section>
+        </div>
+      `;
+    }
+
+    function integrationInfo() {
+      modal('Backend integration requirements', `
+        <p>A production deployment needs authenticated APIs, authorization, secure document storage, OCR, audit orchestration and verified reference lookup.</p>
+        <div class="notice" style="margin:12px 0">
+          <strong>Proposed integration endpoints</strong><br>
+          <pre style="font-size:11px;white-space:pre-wrap;margin-top:6px">GET/POST /api/cases
+PATCH/DELETE /api/cases/:id
+POST /api/cases/:id/documents
+GET/PATCH /api/documents/:id
+POST /api/documents/:id/reprocess
+POST /api/cases/:id/audits
+GET /api/cases/:id/price-references
+GET/POST /api/cases/:id/evidence
+POST /api/cases/:id/drafts
+GET /api/cases/:id/reports</pre>
+        </div>
+        <p class="note-text">The source bundle includes a proposed typed client and integration notes. No existing backend was supplied.</p>
+      `);
+    }
+
+    /* ==========================================================================
+       SETTINGS & PRIVACY VIEW
+       ========================================================================== */
+    let prefs = { name: '', contact: '', language: 'English', notifications: true };
+
+    function settingsPage() {
+      return `
+        ${heading('Settings & privacy', 'You should always know what is stored, and where.')}
+        <div class="two-col">
+          <section class="card padded">
+            <h3 style="margin-top:0;font-size:15px;font-weight:700">Workspace preferences</h3>
+            <form onsubmit="event.preventDefault();saveSettings(this)">
+              <div class="form-grid">
+                <div>
+                  <label for="pref-name">Display name</label>
+                  <input name="name" id="pref-name" value="${esc(prefs.name)}" placeholder="Optional">
+                </div>
+                <div>
+                  <label for="pref-contact">Contact information</label>
+                  <input type="email" name="contact" id="pref-contact" value="${esc(prefs.contact)}" placeholder="Optional · not used to send email">
+                </div>
+                <div class="wide">
+                  <label for="pref-lang">Language preference</label>
+                  <select name="language" id="pref-lang">
+                    <option>English</option>
+                    <option disabled>Hindi · translation not implemented</option>
+                  </select>
+                </div>
+                <div class="wide">
+                  <label class="check">
+                    <input type="checkbox" name="notifications" ${prefs.notifications ? 'checked' : ''}>
+                    Show in-app case reminders
+                  </label>
+                </div>
+              </div>
+              <button class="primary" type="submit" style="margin-top:16px">Save session preferences</button>
+              <p class="inline-note">Preferences are session-only. No profile server or email delivery is connected.</p>
+            </form>
+          </section>
+          <section class="card padded">
+            <h3 style="margin-top:0;font-size:15px;font-weight:700">Privacy & account security</h3>
+            <p class="note-text">No account is signed in. Authentication, role-based access and encrypted server storage have not been implemented.</p>
+            <p class="note-text">Selected files are held as temporary browser object URLs. No medical data is written to localStorage or sent by this application to a server. Closing or reloading the tab clears it.</p>
+            <div class="actions" style="margin-top:16px">
+              ${btn('Account security', "unavailable('Account security','GET /api/account/security')")}
+              ${btn('Export session data', 'exportSession()', '', 'download')}
+              ${btn('Clear workspace', 'clearWorkspace()', 'danger', 'trash')}
+            </div>
+            <p class="inline-note">Export includes case metadata, findings and notes, but not document binaries. Treat exported data as sensitive.</p>
+          </section>
+        </div>
+        <div class="space"></div>
+        <div class="notice warning">
+          ${icon('warning')}
+          <span>Production use requires security and privacy review, consent handling, access controls, retention policies and backend integration. This is a frontend prototype, not a secure patient-record service.</span>
+        </div>
+      `;
+    }
+
+    function saveSettings(form) {
+      let f = new FormData(form);
+      prefs = { ...Object.fromEntries(f), notifications: f.has('notifications') };
+      toast('Preferences saved in this tab only.');
+    }
+
+    function exportSession() {
+      download(`bill-saathi-${demo ? 'demo' : 'local'}-session.json`, JSON.stringify({
+        mode: demo ? 'demo' : 'local',
+        exportedAt: new Date().toISOString(),
+        data: state(),
+        drafts: Object.fromEntries(Object.entries(drafts).filter(([k]) => k.startsWith(demo ? 'demo:' : 'local:')))
+      }, null, 2), 'application/json');
+    }
+
+    function clearWorkspace() {
+      modal('Clear this workspace?', `
+        <p>This clears cases, findings, notes, local files and drafts for the current ${demo ? 'demo' : 'local'} workspace. It does not delete exported copies or server data.</p>
+      `, btn('Clear workspace', "doClear()", 'danger'));
+    }
+
+    function doClear() {
+      let s = state();
+      s.docs.forEach(d => {
+        if (docUrls.has(d.id)) {
+          URL.revokeObjectURL(docUrls.get(d.id));
+          docUrls.delete(d.id);
+        }
+        delete ocrEdits[d.id];
+      });
+      for (let k of Object.keys(drafts)) {
+        if (k.startsWith(demo ? 'demo:' : 'local:')) delete drafts[k];
+      }
+      Object.assign(s, { cases: [], docs: [], findings: [], notes: {}, activity: [] });
+      pending = [];
+      document.getElementById('dialog').close();
+      go('overview');
+      toast('Workspace cleared from this tab.');
+    }
+
+    /* Event Listeners */
+    window.addEventListener('hashchange', () => {
+      let r = location.hash.slice(1);
+      if (r && r !== route) {
+        route = r;
+        render();
+      }
+    });
+
+    document.getElementById('dialog').addEventListener('click', e => {
+      if (e.target === e.currentTarget) {
+        let b = e.currentTarget.getBoundingClientRect();
+        if (e.clientX < b.left || e.clientX > b.right || e.clientY < b.top || e.clientY > b.bottom) {
+          e.currentTarget.close();
+        }
+      }
+    });
+
+    window.addEventListener('beforeunload', () => docUrls.forEach(u => URL.revokeObjectURL(u)));
+
+    /* Initial Load */
+    route = location.hash.slice(1) || 'overview';
+    render();
+  </script>
+</body>
+</html>

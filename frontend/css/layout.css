@@ -1,0 +1,391 @@
+/**
+ * Bill Saathi AI - Core Layout (Sidebar, Topbar, Shell, Grid)
+ */
+
+/* Fixed Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  background: #ffffff;
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  z-index: 30;
+  transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.brand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 24px 20px 20px;
+}
+
+.brand-mark {
+  background: var(--teal);
+  color: #ffffff;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(13, 148, 136, 0.2);
+}
+
+.brand-mark svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 2;
+}
+
+.brand-copy {
+  font-size: 17px;
+  font-weight: 750;
+  color: var(--text);
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+}
+
+.brand small {
+  display: block;
+  letter-spacing: 1.6px;
+  font-size: 8.5px;
+  font-weight: 700;
+  color: var(--text-subtle);
+  margin-top: 3px;
+}
+
+.nav-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--text-subtle);
+  padding: 16px 20px 8px;
+  text-transform: uppercase;
+}
+
+.nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 10px;
+}
+
+.nav button {
+  width: 100%;
+  justify-content: flex-start;
+  border: none;
+  background: transparent;
+  font-size: 12.5px;
+  font-weight: 500;
+  padding: 9px 12px;
+  margin-bottom: 2px;
+  color: #475569;
+  border-radius: var(--radius-md);
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.nav button svg {
+  width: 17px;
+  height: 17px;
+  color: #64748b;
+}
+
+.nav button:hover {
+  background: var(--line-subtle);
+  color: var(--text);
+}
+
+.nav button:hover svg {
+  color: var(--text);
+}
+
+.nav button.active {
+  color: var(--blue);
+  background: var(--blue-light);
+  font-weight: 600;
+}
+
+.nav button.active svg {
+  color: var(--blue);
+}
+
+.nav .separate {
+  border-top: 1px solid var(--line);
+  margin-top: 14px;
+  padding-top: 12px;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 16px 14px;
+  border-top: 1px solid var(--line);
+  background: #ffffff;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  background: #e0f2fe;
+  color: #0369a1;
+  display: inline-grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 750;
+  flex-shrink: 0;
+  border: 1px solid #bae6fd;
+}
+
+.profile-copy strong {
+  font-size: 12.5px;
+  display: block;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.profile-copy small {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.collapse-btn {
+  margin-top: 12px;
+  width: 100%;
+  font-size: 11.5px;
+  padding: 7px 10px;
+  color: var(--text-muted);
+  border-color: var(--line);
+}
+
+.collapse-btn:hover {
+  color: var(--text);
+  background: var(--line-subtle);
+}
+
+/* Collapsed Sidebar */
+.collapsed .sidebar {
+  width: var(--sidebar-collapsed-width);
+}
+
+.collapsed .shell {
+  margin-left: var(--sidebar-collapsed-width);
+}
+
+.collapsed .brand {
+  padding: 20px 15px;
+  justify-content: center;
+}
+
+.collapsed .brand-copy,
+.collapsed .nav-label,
+.collapsed .nav button span,
+.collapsed .profile .profile-copy,
+.collapsed .sidebar-footer .collapse-label {
+  display: none;
+}
+
+.collapsed .nav button {
+  justify-content: center;
+  padding: 11px;
+}
+
+.collapsed .sidebar-footer {
+  padding: 14px 10px;
+}
+
+.collapsed .profile {
+  justify-content: center;
+}
+
+/* Shell & Sticky Topbar */
+.shell {
+  margin-left: var(--sidebar-width);
+  transition: margin 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.topbar {
+  height: var(--topbar-height);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 32px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.crumb {
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+.crumb strong {
+  display: block;
+  color: var(--text);
+  font-size: 17px;
+  font-weight: 750;
+  letter-spacing: -0.3px;
+  margin-bottom: 1px;
+}
+
+.top-search {
+  margin-left: auto;
+  position: relative;
+  width: 280px;
+}
+
+.top-search input {
+  padding-left: 36px;
+  padding-right: 12px;
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  font-size: 12px;
+  width: 100%;
+  height: 38px;
+  color: var(--text);
+  transition: all 0.15s ease;
+}
+
+.top-search input:focus {
+  background: #ffffff;
+  border-color: var(--blue);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.top-search svg {
+  position: absolute;
+  left: 11px;
+  top: 10px;
+  color: var(--text-subtle);
+  width: 16px;
+  height: 16px;
+}
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-btn {
+  padding: 8px;
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+}
+
+.icon-btn:hover {
+  background: var(--line-subtle);
+  color: var(--text);
+}
+
+.top-actions .avatar {
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border: none;
+}
+
+.top-actions .primary {
+  font-size: 12.5px;
+  padding: 8px 16px;
+  height: 38px;
+}
+
+.mobile-toggle {
+  display: none;
+}
+
+/* Main Content Area */
+.main {
+  flex: 1;
+  max-width: var(--max-content-width);
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px 32px 40px;
+}
+
+.grid-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 296px;
+  gap: 20px;
+  align-items: start;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Page Heading */
+.page-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.page-heading h1 {
+  font-size: 24px;
+  margin: 0 0 4px;
+}
+
+.page-heading p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Footers */
+.privacy-footer {
+  font-size: 11px;
+  color: var(--text-subtle);
+  text-align: center;
+  margin: 28px 0 10px;
+  font-weight: 500;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-subtle);
+  margin-top: 14px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  gap: 12px;
+}
+
+.footer span {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.footer svg {
+  width: 14px;
+  height: 14px;
+}
+
+.overlay {
+  display: none;
+}
